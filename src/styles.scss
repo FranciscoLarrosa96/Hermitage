@@ -6,33 +6,33 @@
 
 :root {
   /* Hermitage Color Palette */
-  --color-primary: #c26d4b; /* Terracotta */
-  --color-accent: #8e442d; /* Warm Sienna */
-  
-  --color-bg: #fdfaf7; /* Soft Light Sand */
+  --color-primary: #8d2228; /* Burgundy Red */
+  --color-accent: #6b1a1e; /* Deep Burgundy */
+
+  --color-bg: #f8fafb; /* Soft Light Background */
   --color-surface: #ffffff;
-  
-  --color-text-primary: #3a2e28;
-  --color-text-secondary: #7c4a36;
-  
-  --color-border: #f4ede4;
-  --color-hover: #a35336;
-  
+
+  --color-text-primary: #2a2a2a;
+  --color-text-secondary: #5a5a5a;
+
+  --color-border: #e5edef;
+  --color-hover: #6b1a1e;
+
   /* Additional themed colors */
-  --color-clay: #7c4a36;
-  --color-sand: #f4ede4;
-  --color-accent-sienna: #8e442d;
+  --color-clay: #ccdada; /* Light Blue-Gray */
+  --color-sand: #ccdada;
+  --color-accent-sienna: #8d2228;
 }
 
 .dark {
-  --color-bg: #2d241f; /* Dark Earth */
-  --color-surface: #3d322c;
-  
-  --color-text-primary: #f4ede4;
-  --color-text-secondary: #d4c3b5;
-  
+  --color-bg: #1a1a1a; /* Dark Background */
+  --color-surface: #252525;
+
+  --color-text-primary: #e5edef;
+  --color-text-secondary: #b0b8bd;
+
   --color-border: rgba(255, 255, 255, 0.05);
-  --color-hover: #c26d4b;
+  --color-hover: #a42930;
 }
 
 html {
