@@ -1,59 +1,229 @@
-# Hermitage
+<div align="center">
+  <h1>🏔️ Hermitage Boutique Hotel</h1>
+  <p><strong>Landing Page Institucional</strong></p>
+  <p>Una experiencia web premium para un hotel boutique en las sierras de Tandil, Argentina</p>
+</div>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+---
 
-## Development server
+## 📋 Descripción del Proyecto
 
-To start a local development server, run:
+**Hermitage** es una landing page empresarial desarrollada para un hotel boutique de alta gama ubicado en Tandil, Argentina. El proyecto combina diseño moderno, accesibilidad y rendimiento óptimo para ofrecer una experiencia de navegación excepcional que refleja la calidad y elegancia del establecimiento.
+
+### 🎯 Características Principales
+
+- ✨ **Diseño Premium**: Interfaz elegante y minimalista con animaciones fluidas
+- 🎨 **Identidad Visual Corporativa**: Paleta de colores personalizada (#8D2228, #CCDADA)
+- 📱 **Responsive Design**: Experiencia óptima en todos los dispositivos
+- ♿ **Accesibilidad WCAG AA**: Cumplimiento de estándares de accesibilidad web
+- ⚡ **Alto Rendimiento**: Optimizado para carga rápida y SEO
+- 🌙 **Modo Oscuro**: Soporte para preferencias de tema del usuario
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+### Framework y Core
+
+- **[Angular 21.0](https://angular.dev/)** - Framework principal
+- **[TypeScript 5.9](https://www.typescriptlang.org/)** - Lenguaje de programación
+- **[RxJS 7.8](https://rxjs.dev/)** - Programación reactiva
+
+### Estilos y UI
+
+- **[Tailwind CSS 3.4](https://tailwindcss.com/)** - Framework de utilidades CSS
+- **[AOS 2.3](https://michalsnik.github.io/aos/)** - Animaciones al hacer scroll
+- **SCSS** - Preprocesador CSS para estilos personalizados
+
+### Herramientas de Desarrollo
+
+- **[Angular CLI 21.0.5](https://angular.dev/cli)** - Herramienta de línea de comandos
+- **[Vitest 4.0](https://vitest.dev/)** - Framework de testing
+- **[Prettier](https://prettier.io/)** - Formateador de código
+- **npm 11.1** - Gestor de paquetes
+
+### Arquitectura
+
+- **Standalone Components** - Componentes independientes (sin NgModules)
+- **Signals** - Sistema de reactividad moderno de Angular
+- **OnPush Change Detection** - Estrategia optimizada de detección de cambios
+
+---
+
+## 🚀 Inicio Rápido
+
+### Prerrequisitos
 
 ```bash
-ng serve
+Node.js >= 18.x
+npm >= 11.x
+Angular CLI >= 21.x
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Instalación
 
-## Code scaffolding
+1. **Clonar el repositorio**
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+   ```bash
+   git clone https://github.com/tu-usuario/hermitage.git
+   cd hermitage
+   ```
+
+2. **Instalar dependencias**
+
+   ```bash
+   npm install
+   ```
+
+3. **Iniciar servidor de desarrollo**
+
+   ```bash
+   npm start
+   ```
+
+4. **Abrir en el navegador**
+   ```
+   http://localhost:4200
+   ```
+
+---
+
+## 📦 Scripts Disponibles
+
+| Comando              | Descripción                                |
+| -------------------- | ------------------------------------------ |
+| `npm start`          | Inicia el servidor de desarrollo           |
+| `npm run build`      | Compila el proyecto para desarrollo        |
+| `npm run build-prod` | Compila para producción con optimizaciones |
+| `npm test`           | Ejecuta las pruebas unitarias con Vitest   |
+| `npm run watch`      | Compila en modo observación                |
+| `npm run deploy`     | Despliega a GitHub Pages                   |
+
+---
+
+## 🏗️ Estructura del Proyecto
+
+```
+hermitage/
+├── src/
+│   ├── app/
+│   │   ├── app.ts              # Componente principal
+│   │   ├── app.html            # Template principal
+│   │   ├── app.scss            # Estilos del componente
+│   │   ├── app.config.ts       # Configuración de la aplicación
+│   │   └── app.routes.ts       # Definición de rutas
+│   ├── index.html              # HTML principal
+│   ├── main.ts                 # Punto de entrada
+│   └── styles.scss             # Estilos globales y variables
+├── public/                     # Assets públicos
+├── angular.json                # Configuración de Angular
+├── tailwind.config.js          # Configuración de Tailwind
+├── tsconfig.json               # Configuración de TypeScript
+└── package.json                # Dependencias y scripts
+
+```
+
+---
+
+## 🎨 Paleta de Colores Corporativa
+
+```scss
+Primary:    #8D2228  /* Burgundy Red - Color principal del hotel */
+Secondary:  #CCDADA  /* Light Blue-Gray - Color complementario */
+Accent:     #6B1A1E  /* Deep Burgundy - Acentos y hover */
+Background: #F8FAFB  /* Soft Light Background */
+```
+
+---
+
+## 📱 Secciones de la Landing Page
+
+1. **Hero Section** - Presentación impactante con imagen de fondo
+2. **Testimonios** - Reseñas de huéspedes anteriores
+3. **Esencia** - Historia y filosofía del hotel
+4. **Características** - Servicios y beneficios destacados
+5. **Habitaciones** - Showcase de las suites disponibles
+6. **Wellness** - Experiencias de spa y bienestar
+7. **Contacto** - Formulario y ubicación con mapa integrado
+8. **Footer** - Información corporativa y enlaces
+
+---
+
+## 🧪 Testing
+
+El proyecto utiliza Vitest para pruebas unitarias:
 
 ```bash
-ng generate component component-name
+npm test
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## 🚢 Despliegue
+
+### GitHub Pages
+
+El proyecto está configurado para despliegue automático en GitHub Pages:
 
 ```bash
-ng generate --help
+npm run deploy
 ```
 
-## Building
+Este comando:
 
-To build the project run:
+1. Compila el proyecto en modo producción
+2. Configura la base href para GitHub Pages
+3. Despliega automáticamente a la rama `gh-pages`
+
+### Otros Entornos
+
+Para desplegar en otros servicios (Netlify, Vercel, etc.):
 
 ```bash
-ng build
+npm run build-prod
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Los archivos compilados estarán en `dist/hermitage/browser/`
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 🤝 Mejores Prácticas Implementadas
 
-```bash
-ng test
-```
+- ✅ **Componentes Standalone**: Arquitectura moderna sin NgModules
+- ✅ **Signals**: Sistema de reactividad de Angular 21
+- ✅ **OnPush Change Detection**: Optimización de rendimiento
+- ✅ **Lazy Loading**: Carga diferida de recursos
+- ✅ **NgOptimizedImage**: Optimización de imágenes
+- ✅ **Accesibilidad**: WCAG AA compliance
+- ✅ **SEO Friendly**: Meta tags y estructura semántica
+- ✅ **Mobile First**: Diseño responsive desde el inicio
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 📞 Contacto del Hotel
 
-```bash
-ng e2e
-```
+**Hermitage Boutique Hotel**
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- 📍 Tandil, Buenos Aires, Argentina
+- 📧 hola@hermitagetandil.com
+- 📱 +54 2494 286288
+- 💬 WhatsApp: +54 9 2494 556677
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📄 Licencia
+
+Este proyecto fue desarrollado para uso comercial exclusivo de Hermitage Boutique Hotel.
+
+---
+
+## 🙏 Agradecimientos
+
+Desarrollado con ❤️ para brindar la mejor experiencia digital que refleje la calidad y calidez del Hermitage Boutique Hotel.
+
+---
+
+<div align="center">
+  <p><strong>Hermitage Boutique Hotel © 2024-2026</strong></p>
+  <p>Donde la calma encuentra su hogar</p>
+</div>
