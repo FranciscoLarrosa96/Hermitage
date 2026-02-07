@@ -5,8 +5,6 @@
   href="https://wa.me/5492494556677"
   rel="noopener noreferrer"
   target="_blank"
-  data-aos="fade-up"
-  data-aos-delay="1000"
 >
   <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -26,14 +24,12 @@
       </div>
       <div class="flex flex-col">
         <h2 class="text-text-primary text-xl font-bold tracking-tight">Hermitage</h2>
-        <div class="flex items-center gap-0.5">
-          <span class="material-symbols-outlined text-primary text-xs" style="font-variation-settings: 'FILL' 1">star</span>
-          <span class="material-symbols-outlined text-primary text-xs" style="font-variation-settings: 'FILL' 1">star</span>
-          <span class="material-symbols-outlined text-primary text-xs" style="font-variation-settings: 'FILL' 1">star</span>
+        <div class="flex items-center">
+          <img src="assets/stars.png" alt="3 estrellas" class="h-3" />
         </div>
       </div>
     </div>
-    <nav class="hidden md:flex items-center gap-10">
+    <nav class="hidden md:flex items-center gap-10 text-white">
       <a
         class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
         href="#essence"
@@ -66,29 +62,18 @@
 
 <!-- Hero Section -->
 <section
-  class="relative h-[90vh] md:h-screen flex items-center justify-center pt-16"
+  class="relative h-[90vh] md:h-screen flex items-center justify-center pt-16 bg-cover bg-center"
   aria-label="Sección principal del hotel"
+  style="background-image: url('assets/hero-img.avif')"
 >
-  <div class="absolute inset-0 z-0">
-    <div
-      class="w-full h-full bg-cover bg-center"
-      role="img"
-      aria-label="Vista panorámica del Hotel Hermitage con las sierras de Tandil al fondo"
-      style="
-        background-image:
-          linear-gradient(rgba(45, 36, 31, 0.3), rgba(45, 36, 31, 0.4)),
-          url('https://lh3.googleusercontent.com/aida-public/AB6AXuBeoEgP2xHffCct3KbxlbX3Bbc5PjI44lxPGkxWLppdoervcTPV2lqJk-Z8lL3tBOxPfv7ijwL_gDGW2OV38dovQewgLmJ01DAWh0drn_BPNEFShtdFGmbv5zz6DyqZTsEGThq2gar1nRDUVrSK0RdpASNouTtW0zyxmMitg2o_x0IuRPJ4hD_OYj9aQngK8rgi8_XZH_PmWV6pk_IJQUHWbWnkbZiaKZTSplKGTqk_4_NECKyWCZgpj7Yz8LBghwttNJO0_NVzJ6A8');
-      "
-    ></div>
-  </div>
+  <!-- Overlay with backdrop blur -->
+  <div class="absolute inset-0 bg-black/30 backdrop-blur-sm z-0"></div>
   <div class="relative z-10 text-center px-6 max-w-4xl">
     <h1 class="text-white text-7xl md:text-9xl font-light serif-title mb-4" data-aos="fade-up">
       Hermitage
     </h1>
-    <div class="flex items-center justify-center gap-1 mb-4" data-aos="fade-up" data-aos-delay="150">
-      <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1">star</span>
-      <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1">star</span>
-      <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1">star</span>
+    <div class="flex items-center justify-center mb-4" data-aos="fade-up" data-aos-delay="150">
+      <img src="assets/stars.png" alt="3 estrellas" class="h-12" />
     </div>
     <h2
       class="text-white text-lg md:text-xl font-light tracking-[0.3em] uppercase mb-12"
@@ -118,112 +103,64 @@
   </div>
 </section>
 
-<!-- Testimonial Section -->
-<section
-  class="py-20 px-6 lg:px-40 bg-sand/30 dark:bg-[#322923]"
-  aria-label="Testimonios de huéspedes"
->
-  <div class="max-w-[800px] mx-auto text-center">
-    <p class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-8" data-aos="fade-down">
+<!-- Reviews Carousel Section -->
+<!-- Reviews Carousel Section -->
+<section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
+  <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
+    <div class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm">
+      <!-- Icon (sparkle/star) -->
+      <svg class="h-4 w-4 sm:h-5 sm:w-5 text-primary" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z" fill="currentColor"/>
+      </svg>
+
+      <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
+        Experiencias compartidas
+      </p>
+    </div>
+
+    <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
       Lo que dicen nuestros huéspedes
-    </p>
-    <blockquote
-      class="text-2xl md:text-3xl serif-title text-text-secondary leading-relaxed italic"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      "Un rincón donde el tiempo parece detenerse. La vista de las sierras al despertar es,
-      sencillamente, una experiencia que te cambia el pulso."
-    </blockquote>
-    <p
-      class="mt-6 text-sm font-bold tracking-widest opacity-60"
-      data-aos="fade-up"
-      data-aos-delay="200"
-    >
-      — JULIANA & MARCOS, BUENOS AIRES
-    </p>
-  </div>
-</section>
-
-<!-- Essence Section -->
-<section class="py-28 px-6 lg:px-40 bg-bg" id="essence">
-  <div class="max-w-[960px] mx-auto text-center">
-    <h2
-      class="text-text-primary text-4xl md:text-5xl font-bold leading-tight mb-8"
-      data-aos="fade-up"
-    >
-      La Esencia del Silencio
     </h2>
-    <div
-      class="w-16 h-0.5 bg-primary/40 mx-auto mb-10"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    ></div>
-    <p
-      class="text-xl md:text-2xl text-text-secondary leading-relaxed max-w-3xl mx-auto font-light text-balance"
-      data-aos="fade-up"
-      data-aos-delay="200"
-    >
-      Enclavado en las sierras más antiguas, Hermitage ofrece un santuario para aquellos que buscan
-      reencontrarse con lo esencial. Un espacio donde la arquitectura orgánica se funde con el
-      paisaje de Tandil.
+
+    <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
+      Reseñas reales para que reserves con confianza.
     </p>
+  </div>
+
+  <!-- Infinite Marquee -->
+  <div class="relative">
+    <!-- Soft fades on the sides (premium look) -->
+    <div class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"></div>
+
+    <!-- Marquee track -->
+    <div class="flex gap-4 sm:gap-6 lg:gap-8 animate-marquee hover:[animation-play-state:paused] will-change-transform">
+      @for (img of reviewsMarquee; track $index) {
+        <img
+          [src]="'assets/reviews/' + img"
+          alt="Reseña de huésped"
+          loading="lazy"
+          class="
+            h-[160px] sm:h-[220px] lg:h-[270px] xl:h-[360px]
+            w-auto
+            rounded-2xl
+            shadow-xl
+            object-cover
+            ring-1 ring-black/5
+          "
+          [attr.aria-hidden]="$index >= reviews.length ? true : null"
+        />
+      }
+    </div>
   </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-24 px-6 lg:px-40 bg-surface" aria-label="Características y servicios del hotel">
-  <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-    <div
-      class="group flex flex-col items-center text-center"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      <div
-        class="w-16 h-16 rounded-full bg-sand/50 dark:bg-white/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors"
-      >
-        <span class="material-symbols-outlined text-3xl text-primary">nature_people</span>
-      </div>
-      <h3 class="text-xl font-bold mb-3 tracking-tight">Naturaleza Viva</h3>
-      <p class="text-text-secondary text-sm leading-relaxed">
-        Senderos privados que serpentean entre formaciones graníticas milenarias y el perfume de la
-        flora autóctona.
-      </p>
-    </div>
-    <div
-      class="group flex flex-col items-center text-center"
-      data-aos="fade-up"
-      data-aos-delay="200"
-    >
-      <div
-        class="w-16 h-16 rounded-full bg-sand/50 dark:bg-white/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors"
-      >
-        <span class="material-symbols-outlined text-3xl text-primary">notifications_off</span>
-      </div>
-      <h3 class="text-xl font-bold mb-3 tracking-tight">Silencio Absoluto</h3>
-      <p class="text-text-secondary text-sm leading-relaxed">
-        Ubicación estratégica alejada de cualquier pulso urbano, garantizando una desconexión
-        auditiva y mental absoluta.
-      </p>
-    </div>
-    <div
-      class="group flex flex-col items-center text-center"
-      data-aos="fade-up"
-      data-aos-delay="300"
-    >
-      <div
-        class="w-16 h-16 rounded-full bg-sand/50 dark:bg-white/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors"
-      >
-        <span class="material-symbols-outlined text-3xl text-primary">bed</span>
-      </div>
-      <h3 class="text-xl font-bold mb-3 tracking-tight">Descanso Sublime</h3>
-      <p class="text-text-secondary text-sm leading-relaxed">
-        Ropa de cama de 600 hilos y amenidades botánicas diseñadas para que cada noche sea un viaje
-        de recuperación.
-      </p>
-    </div>
-  </div>
-</section>
+
+<div class="w-full flex justify-center items-center gap-4 my-16">
+  <div class="w-16 h-[2px] bg-border"></div>
+  <i class="fas fa-image text-primary text-xl"></i>
+  <div class="w-16 h-[2px] bg-border"></div>
+</div>
 
 <!-- Rooms Section -->
 <section class="py-28 px-6 lg:px-40 bg-bg" id="rooms">

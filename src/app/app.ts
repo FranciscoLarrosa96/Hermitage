@@ -1,11 +1,10 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -13,7 +12,15 @@ export class App implements OnInit {
   private readonly meta = inject(Meta);
   private readonly titleService = inject(Title);
   protected readonly title = signal('hermitage');
-
+  public readonly reviews = [
+    'review1.png',
+    'review2.png',
+    'review3.png',
+    'review4.png',
+    'review5.png',
+    'review6.png',
+    'review7.png',
+  ];
   ngOnInit() {
     this.initSEO();
     this.initAOS();
@@ -51,6 +58,10 @@ export class App implements OnInit {
     // Twitter Card
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: 'Hermitage Boutique Hotel Tandil' });
+  }
+
+  get reviewsMarquee() {
+    return [...this.reviews, ...this.reviews];
   }
 
   private initAOS(): void {
