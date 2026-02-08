@@ -37,3 +37,37 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation: none; }
 }
+
+
+/* --- REVIEW CARD HOVER --- */
+
+.review-card {
+  cursor: pointer;
+}
+
+.review-card:hover .review-img {
+  transform: scale(1.06);
+}
+
+.review-card:hover .review-overlay {
+  opacity: 1;
+}
+
+/* Mobile: overlay siempre visible pero más suave */
+@media (max-width: 640px) {
+  .review-overlay {
+    opacity: 0.85;
+  }
+
+  .review-img {
+    transform: scale(1.02);
+  }
+}
+
+.review-card:hover .review-img {
+  transform: scale(1.06);
+}
+
+.review-card:hover .review-overlay {
+  opacity: 1;
+}

@@ -26,11 +26,16 @@ export class App implements OnInit {
     'review11.png',
     'review12.png',
   ];
+  public selectedReview: string | null = null;
+
   ngOnInit() {
     this.initSEO();
     this.initAOS();
   }
 
+  /**
+   * Configura el título de la página y las meta etiquetas para mejorar el SEO. Esto incluye la descripción, palabras clave, Open Graph y Twitter Card para optimizar cómo se muestra el sitio en los motores de búsqueda y redes sociales.
+   */
   private initSEO(): void {
     // Configurar título
     this.titleService.setTitle('Hermitage Boutique Hotel Tandil | Hotel de Lujo en las Sierras');
@@ -65,15 +70,38 @@ export class App implements OnInit {
     this.meta.updateTag({ name: 'twitter:title', content: 'Hermitage Boutique Hotel Tandil' });
   }
 
+  /**
+   * Devuelve un array que contiene las reseñas duplicadas para crear un efecto de marquee continuo en la sección de reseñas. Al concatenar el array consigo mismo, se asegura que las reseñas se repitan sin interrupciones cuando se desplazan horizontalmente.
+   */
   get reviewsMarquee() {
     return [...this.reviews, ...this.reviews];
   }
 
+  /**
+   * Inicializa la librería AOS para animaciones al hacer scroll. Configura la duración, tipo de easing y si las animaciones se repiten o no.
+   */
   private initAOS(): void {
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
       once: false,
     });
+  }
+
+  /**
+   *  Abre la imagen de la reseña en un modal y desactiva el scroll de fondo.
+   * @param img
+   */
+  openReview(img: string) {
+    this.selectedReview = img;
+    document.body.style.overflow = 'hidden'; // evita scroll de fondo
+  }
+
+  /**
+   * Cierra el modal de la reseña y restaura el scroll de fondo.
+   */
+  closeReview() {
+    this.selectedReview = null;
+    document.body.style.overflow = '';
   }
 }

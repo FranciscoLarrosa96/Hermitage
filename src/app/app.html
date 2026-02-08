@@ -32,8 +32,8 @@
     <nav class="hidden md:flex items-center gap-10 text-white">
       <a
         class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
-        href="#essence"
-        >Esencia</a
+        href="#inicio"
+        >Inicio</a
       >
       <a
         class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
@@ -65,6 +65,7 @@
   class="relative h-[90vh] md:h-screen flex items-center justify-center pt-16 bg-cover bg-center"
   aria-label="Sección principal del hotel"
   style="background-image: url('assets/hero-img.avif')"
+  id="inicio"
 >
   <!-- Overlay with backdrop blur -->
   <div class="absolute inset-0 bg-black/30 backdrop-blur-sm z-0"></div>
@@ -106,9 +107,19 @@
 <section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
   <!-- Header -->
   <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
-    <div class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm">
-      <svg class="h-4 w-4 sm:h-5 sm:w-5 text-primary" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z" fill="currentColor"/>
+    <div
+      class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
+    >
+      <svg
+        class="h-4 w-4 sm:h-5 sm:w-5 text-primary"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z"
+          fill="currentColor"
+        />
       </svg>
       <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
         Experiencias compartidas
@@ -125,41 +136,88 @@
 
   <div class="relative">
     <!-- fades -->
-    <div class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"></div>
-    <div class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"></div>
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"
+    ></div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"
+    ></div>
 
     <div class="space-y-6 sm:space-y-8">
       <!-- Row 1 (left) -->
-      <div class="marquee marquee-left flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
+      <div
+        class="marquee marquee-left flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform"
+      >
         @for (img of reviewsMarquee; track $index) {
-          <img
-            [src]="'assets/reviews/' + img"
-            alt="Reseña de huésped"
-            loading="lazy"
-            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
-            [attr.aria-hidden]="$index >= reviews.length ? true : null"
-          />
+          <div
+            class="review-card relative overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5 shrink-0 cursor-pointer"
+            (click)="openReview(img)"
+          >
+            <img
+              [src]="'assets/reviews/' + img"
+              alt="Reseña de huésped"
+              loading="lazy"
+              class="review-img h-[150px] sm:h-[210px] lg:h-[280px] xl:h-[320px] w-auto object-cover transition-transform duration-700 ease-out"
+              [attr.aria-hidden]="$index >= reviews.length ? true : null"
+            />
+
+            <!-- Overlay -->
+            <div
+              class="review-overlay absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] opacity-0 transition-opacity duration-500"
+            >
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-black shadow-lg"
+              >
+                <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+                  />
+                </svg>
+                Ver reseña
+              </span>
+            </div>
+          </div>
         }
       </div>
 
       <!-- Row 2 (right) -->
-      <div class="marquee marquee-right flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
+      <div
+        class="marquee marquee-right flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform"
+      >
         @for (img of reviewsMarquee; track $index) {
-          <img
-            [src]="'assets/reviews/' + img"
-            alt="Reseña de huésped"
-            loading="lazy"
-            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
-            [attr.aria-hidden]="$index >= reviews.length ? true : null"
-          />
+          <div
+            class="review-card relative overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5 shrink-0 cursor-pointer"
+            (click)="openReview(img)"
+          >
+            <img
+              [src]="'assets/reviews/' + img"
+              alt="Reseña de huésped"
+              loading="lazy"
+              class="review-img h-[150px] sm:h-[210px] lg:h-[280px] xl:h-[320px] w-auto object-cover transition-transform duration-700 ease-out"
+              [attr.aria-hidden]="$index >= reviews.length ? true : null"
+            />
+
+            <!-- Overlay -->
+            <div
+              class="review-overlay absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] opacity-0 transition-opacity duration-500"
+            >
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-black shadow-lg"
+              >
+                <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+                  />
+                </svg>
+                Ver reseña
+              </span>
+            </div>
+          </div>
         }
       </div>
     </div>
   </div>
 </section>
-
-
-
 
 <div class="w-full flex justify-center items-center gap-4 my-16">
   <div class="w-16 h-[2px] bg-border"></div>
@@ -511,3 +569,40 @@
     </p>
   </div>
 </footer>
+
+@if (selectedReview) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    (click)="closeReview()"
+  >
+    <!-- Contenido -->
+    <div
+      class="relative max-w-4xl w-full mx-4"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Close button -->
+      <button
+        class="absolute -top-10 right-0 text-white/80 hover:text-white transition"
+        aria-label="Cerrar"
+        (click)="closeReview()"
+      >
+        ✕
+      </button>
+
+      <!-- Imagen -->
+      <img
+        [src]="'assets/reviews/' + selectedReview"
+        alt="Reseña de huésped ampliada"
+        class="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl bg-black"
+      />
+
+      <!-- Footer -->
+      <div class="mt-4 flex items-center justify-between text-white text-sm">
+        <span class="opacity-80">Reseña de huésped</span>
+
+      </div>
+    </div>
+  </div>
+}
