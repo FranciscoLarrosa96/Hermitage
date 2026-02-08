@@ -1,32 +1,39 @@
-/* --- MARQUEE SMOOTH (no jumps) --- */
+/* --- MARQUEE PRO: 2 filas, direcciones opuestas, sin saltos --- */
+
 .marquee {
-  animation: marquee-scroll 30s linear infinite;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
 }
 
 .marquee:hover {
   animation-play-state: paused;
 }
 
-/* El truco: como duplicaste el contenido (A + A),
-   movemos exactamente la mitad del track: -50% */
-@keyframes marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+/* IMPORTANTE:
+   Como renderizamos A + A (duplicado), movemos -50% para loop perfecto */
+@keyframes marquee-left {
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
 }
 
-/* Responsive speed */
+/* Para el sentido contrario, arrancamos ya corridos */
+@keyframes marquee-right {
+  from { transform: translate3d(-50%,0,0); }
+  to   { transform: translate3d(0,0,0); }
+}
+
+/* Velocidades diferentes (se ve más premium) */
+.marquee-left  { animation-name: marquee-left;  animation-duration: 40s; }
+.marquee-right { animation-name: marquee-right; animation-duration: 40s; }
+
+/* En mobile: más lento (más legible) */
 @media (max-width: 640px) {
-  .marquee { animation-duration: 45s; }
-}
-@media (min-width: 1024px) {
-  .marquee { animation-duration: 28s; }
+  .marquee-left  { animation-duration: 48s; }
+  .marquee-right { animation-duration: 56s; }
 }
 
-/* Accesibilidad: si el usuario prefiere menos movimiento */
+/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
   .marquee { animation: none; }
 }

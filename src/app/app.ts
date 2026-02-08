@@ -20,6 +20,11 @@ export class App implements OnInit {
     'review5.png',
     'review6.png',
     'review7.png',
+    'review8.png',
+    'review9.png',
+    'review10.png',
+    'review11.png',
+    'review12.png',
   ];
   ngOnInit() {
     this.initSEO();

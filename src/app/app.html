@@ -104,7 +104,7 @@
 </section>
 
 <section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
-
+  <!-- Header -->
   <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
     <div class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm">
       <svg class="h-4 w-4 sm:h-5 sm:w-5 text-primary" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -128,26 +128,36 @@
     <div class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"></div>
     <div class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"></div>
 
-    <!-- track -->
-    <div
-      class="marquee flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform"
-    >
-      @for (img of reviewsMarquee; track $index) {
-        <img
-          [src]="'assets/reviews/' + img"
-          alt="Reseña de huésped"
-          loading="lazy"
-          class="
-            marquee-item shrink-0
-            h-[160px] sm:h-[220px] lg:h-[300px] xl:h-[360px]
-            w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5
-          "
-          [attr.aria-hidden]="$index >= reviews.length ? true : null"
-        />
-      }
+    <div class="space-y-6 sm:space-y-8">
+      <!-- Row 1 (left) -->
+      <div class="marquee marquee-left flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
+        @for (img of reviewsMarquee; track $index) {
+          <img
+            [src]="'assets/reviews/' + img"
+            alt="Reseña de huésped"
+            loading="lazy"
+            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
+            [attr.aria-hidden]="$index >= reviews.length ? true : null"
+          />
+        }
+      </div>
+
+      <!-- Row 2 (right) -->
+      <div class="marquee marquee-right flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
+        @for (img of reviewsMarquee; track $index) {
+          <img
+            [src]="'assets/reviews/' + img"
+            alt="Reseña de huésped"
+            loading="lazy"
+            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
+            [attr.aria-hidden]="$index >= reviews.length ? true : null"
+          />
+        }
+      </div>
     </div>
   </div>
 </section>
+
 
 
 
