@@ -26,7 +26,6 @@ export class App implements OnInit {
     'review11.png',
     'review12.png',
   ];
-  public selectedReview: string | null = null;
 
   ngOnInit() {
     this.initSEO();
@@ -86,22 +85,5 @@ export class App implements OnInit {
       easing: 'ease-in-out',
       once: false,
     });
-  }
-
-  /**
-   *  Abre la imagen de la reseña en un modal y desactiva el scroll de fondo.
-   * @param img
-   */
-  openReview(img: string) {
-    this.selectedReview = img;
-    document.body.style.overflow = 'hidden'; // evita scroll de fondo
-  }
-
-  /**
-   * Cierra el modal de la reseña y restaura el scroll de fondo.
-   */
-  closeReview() {
-    this.selectedReview = null;
-    document.body.style.overflow = '';
   }
 }
