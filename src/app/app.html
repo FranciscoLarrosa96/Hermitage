@@ -103,16 +103,13 @@
   </div>
 </section>
 
-<!-- Reviews Carousel Section -->
-<!-- Reviews Carousel Section -->
 <section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
+
   <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
     <div class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm">
-      <!-- Icon (sparkle/star) -->
       <svg class="h-4 w-4 sm:h-5 sm:w-5 text-primary" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z" fill="currentColor"/>
       </svg>
-
       <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
         Experiencias compartidas
       </p>
@@ -121,32 +118,29 @@
     <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
       Lo que dicen nuestros huéspedes
     </h2>
-
     <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
       Reseñas reales para que reserves con confianza.
     </p>
   </div>
 
-  <!-- Infinite Marquee -->
   <div class="relative">
-    <!-- Soft fades on the sides (premium look) -->
+    <!-- fades -->
     <div class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"></div>
     <div class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"></div>
 
-    <!-- Marquee track -->
-    <div class="flex gap-4 sm:gap-6 lg:gap-8 animate-marquee hover:[animation-play-state:paused] will-change-transform">
+    <!-- track -->
+    <div
+      class="marquee flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform"
+    >
       @for (img of reviewsMarquee; track $index) {
         <img
           [src]="'assets/reviews/' + img"
           alt="Reseña de huésped"
           loading="lazy"
           class="
-            h-[160px] sm:h-[220px] lg:h-[270px] xl:h-[360px]
-            w-auto
-            rounded-2xl
-            shadow-xl
-            object-cover
-            ring-1 ring-black/5
+            marquee-item shrink-0
+            h-[160px] sm:h-[220px] lg:h-[300px] xl:h-[360px]
+            w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5
           "
           [attr.aria-hidden]="$index >= reviews.length ? true : null"
         />
@@ -154,6 +148,7 @@
     </div>
   </div>
 </section>
+
 
 
 <div class="w-full flex justify-center items-center gap-4 my-16">

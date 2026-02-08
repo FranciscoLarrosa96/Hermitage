@@ -1,0 +1,32 @@
+/* --- MARQUEE SMOOTH (no jumps) --- */
+.marquee {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+/* El truco: como duplicaste el contenido (A + A),
+   movemos exactamente la mitad del track: -50% */
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Responsive speed */
+@media (max-width: 640px) {
+  .marquee { animation-duration: 45s; }
+}
+@media (min-width: 1024px) {
+  .marquee { animation-duration: 28s; }
+}
+
+/* Accesibilidad: si el usuario prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+}
