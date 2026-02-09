@@ -254,22 +254,48 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <!-- Imagen protagonista -->
           <div class="lg:col-span-7">
-            <div class="gallery-card aspect-[16/10]" [attr.data-aos]="'fade-up'" (click)="openLightbox(section.images[0], section.images )">
+            <div
+              class="gallery-card aspect-[16/10]"
+              [attr.data-aos]="'fade-up'"
+              (click)="openLightbox(section.images[0], section.images)"
+            >
               <img [src]="section.images[0]" [alt]="section.title" class="gallery-image" />
             </div>
           </div>
 
           <!-- Texto -->
           <div class="lg:col-span-5">
-            <span
-              class="inline-block mb-3 text-xs uppercase tracking-[0.3em] text-primary font-bold"
-            >
-              {{ section.title }}
-            </span>
+            <div class="relative">
+              <!-- Watermark -->
+              <img
+                [src]="section.icon"
+                alt=""
+                aria-hidden="true"
+                class="absolute -top-6 -right-2 h-28 w-28 opacity-[0.06] select-none pointer-events-none"
+              />
 
-            <p class="text-lg text-text/80 leading-relaxed">
-              {{ section.description }}
-            </p>
+              <!-- Badge (icon + label) -->
+              <div class="inline-flex items-center gap-3 mb-4">
+                <span
+                  class="h-11 w-11 rounded-2xl bg-white/70 backdrop-blur border border-black/5 shadow-sm flex items-center justify-center"
+                >
+                  <img
+                    [src]="section.icon"
+                    [alt]="section.title + ' icon'"
+                    class="h-5 w-5 opacity-80"
+                  />
+                </span>
+
+                <span class="text-xs uppercase tracking-[0.35em] text-primary font-extrabold">
+                  {{ section.title }}
+                </span>
+              </div>
+
+              <!-- Description -->
+              <p class="text-lg text-text/80 leading-relaxed max-w-lg">
+                {{ section.description }}
+              </p>
+            </div>
           </div>
 
           <!-- Grid secundario -->
@@ -279,7 +305,7 @@
                 class="gallery-card"
                 [attr.data-aos]="'fade-up'"
                 [attr.data-aos-delay]="idx * 80"
-                (click)="openLightbox(img, section.images )"
+                (click)="openLightbox(img, section.images)"
               >
                 <img [src]="img" [alt]="section.title" class="gallery-image" />
               </div>
