@@ -423,6 +423,8 @@
         @for (img of reviewsMarquee; track $index) {
           <img
             [src]="'assets/reviews/' + img"
+            [attr.loading]="'eager'"
+            [attr.decoding]="'async'"
             alt="Reseña de huésped"
             loading="lazy"
             class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
@@ -586,7 +588,6 @@
   class="relative overflow-hidden text-white text-center py-28 sm:py-32 lg:py-40 cta-parallax"
   aria-label="Llamado a la acción"
 >
-
   <!-- Optional: un degradé para que quede más premium -->
   <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/70"></div>
 
