@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject, effect } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
@@ -6,9 +6,10 @@ import * as AOS from 'aos';
   selector: 'app-root',
   imports: [],
   templateUrl: './app.html',
-  styleUrl: './app.scss',
+  styleUrls: ['./app.scss'],
   host: {
     '(window:scroll)': 'onWindowScroll()',
+    '(window:keydown)': 'onKeyDown($event)',
   },
 })
 export class App implements OnInit {
@@ -16,6 +17,11 @@ export class App implements OnInit {
   private readonly titleService = inject(Title);
   protected readonly title = signal('hermitage');
   protected readonly isScrolled = signal(false);
+  protected readonly lightboxOpen = signal(false);
+  protected readonly currentImage = signal('');
+  protected readonly currentImageIndex = signal(0);
+  protected readonly currentGalleryImages = signal<string[]>([]);
+
   public readonly reviews = [
     'review1.png',
     'review2.png',
@@ -31,6 +37,51 @@ export class App implements OnInit {
     'review12.png',
   ];
 
+  gallery = [
+    {
+      id: 'hall',
+      title: 'Hall',
+      images: [
+        'assets/gallery/hall/1.avif',
+        'assets/gallery/hall/2.avif',
+        'assets/gallery/hall/3.avif',
+        'assets/gallery/hall/4.avif',
+        'assets/gallery/hall/5.avif',
+      ],
+    },
+    {
+      id: 'terrace',
+      title: 'Terraza',
+      images: [
+        'assets/gallery/terraza/1.avif',
+        'assets/gallery/terraza/2.avif',
+        'assets/gallery/terraza/3.avif',
+        'assets/gallery/terraza/4.avif',
+      ],
+    },
+    {
+      id: 'parking',
+      title: 'Estacionamiento',
+      images: [
+        'assets/gallery/cochera/1.avif',
+        'assets/gallery/cochera/2.avif',
+        'assets/gallery/cochera/3.avif',
+        'assets/gallery/cochera/4.avif',
+      ],
+    },
+    {
+      id: 'gym',
+      title: 'Gimnasio',
+      images: [
+        'assets/gallery/gym/g1.avif',
+        'assets/gallery/gym/g2.avif',
+        'assets/gallery/gym/g3.avif',
+        'assets/gallery/gym/g4.avif',
+        'assets/gallery/gym/g5.avif',
+      ],
+    },
+  ];
+
   ngOnInit() {
     this.initSEO();
     this.initAOS();
@@ -43,7 +94,65 @@ export class App implements OnInit {
     const scrollPosition = window.scrollY;
     this.isScrolled.set(scrollPosition > 700);
   }
+  /**
+   * Abre el lightbox con la imagen seleccionada
+   */
+  protected openLightbox(imageSrc: string, images: string[]): void {
+    this.currentImage.set(imageSrc);
+    this.currentGalleryImages.set(images);
+    this.currentImageIndex.set(images.indexOf(imageSrc));
+    this.lightboxOpen.set(true);
+    document.body.style.overflow = 'hidden';
+  }
 
+  /**
+   * Cierra el lightbox
+   */
+  protected closeLightbox(): void {
+    this.lightboxOpen.set(false);
+    document.body.style.overflow = '';
+  }
+
+  /**
+   * Navega a la imagen anterior en el lightbox
+   */
+  protected previousImage(): void {
+    const images = this.currentGalleryImages();
+    const currentIndex = this.currentImageIndex();
+    const newIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+    this.currentImageIndex.set(newIndex);
+    this.currentImage.set(images[newIndex]);
+  }
+
+  /**
+   * Navega a la imagen siguiente en el lightbox
+   */
+  protected nextImage(): void {
+    const images = this.currentGalleryImages();
+    const currentIndex = this.currentImageIndex();
+    const newIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+    this.currentImageIndex.set(newIndex);
+    this.currentImage.set(images[newIndex]);
+  }
+
+  /**
+   * Maneja la navegación del lightbox con el teclado
+   */
+  protected onKeyDown(event: KeyboardEvent): void {
+    if (!this.lightboxOpen()) return;
+
+    switch (event.key) {
+      case 'Escape':
+        this.closeLightbox();
+        break;
+      case 'ArrowLeft':
+        this.previousImage();
+        break;
+      case 'ArrowRight':
+        this.nextImage();
+        break;
+    }
+  }
   /**
    * Configura el título de la página y las meta etiquetas para mejorar el SEO. Esto incluye la descripción, palabras clave, Open Graph y Twitter Card para optimizar cómo se muestra el sitio en los motores de búsqueda y redes sociales.
    */
