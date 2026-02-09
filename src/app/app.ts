@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, OnInit, signal, inject, effect } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
@@ -7,11 +7,15 @@ import * as AOS from 'aos';
   imports: [],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  host: {
+    '(window:scroll)': 'onWindowScroll()',
+  },
 })
 export class App implements OnInit {
   private readonly meta = inject(Meta);
   private readonly titleService = inject(Title);
   protected readonly title = signal('hermitage');
+  protected readonly isScrolled = signal(false);
   public readonly reviews = [
     'review1.png',
     'review2.png',
@@ -30,6 +34,14 @@ export class App implements OnInit {
   ngOnInit() {
     this.initSEO();
     this.initAOS();
+  }
+
+  /**
+   * Detecta cuando el usuario hace scroll y actualiza el estado del header
+   */
+  protected onWindowScroll(): void {
+    const scrollPosition = window.scrollY;
+    this.isScrolled.set(scrollPosition > 700);
   }
 
   /**
