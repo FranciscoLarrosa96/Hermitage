@@ -250,7 +250,7 @@
 
     <!-- Blocks -->
     <div class="space-y-16">
-      @for (section of gallery; track section.id) {
+      @for (section of gallery; track section.id; let last = $last) {
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <!-- Imagen protagonista -->
           <div class="lg:col-span-7">
@@ -312,6 +312,21 @@
             }
           </div>
         </div>
+        @if (!last) {
+          <div class="my-12 sm:my-14 lg:my-16 flex items-center justify-center">
+            <div
+              class="h-px w-full max-w-5xl"
+              style="
+                background: linear-gradient(
+                  to right,
+                  transparent,
+                  rgba(141, 34, 40, 0.25),
+                  transparent
+                );
+              "
+            ></div>
+          </div>
+        }
       }
     </div>
   </div>
