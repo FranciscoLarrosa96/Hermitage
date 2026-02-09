@@ -19,12 +19,13 @@
 >
   <div class="max-w-[1200px] mx-auto flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="text-primary">
-        <span class="material-symbols-outlined text-3xl">landscape</span>
-      </div>
       <div class="flex flex-col">
-        <h2 class="text-text-primary text-xl font-bold tracking-tight">Hermitage</h2>
-        <div class="flex items-center">
+        <div class="flex flex-col items-center">
+          <img
+            src="assets/logos/hotel_logo_blanco.svg"
+            alt="Hermitage Boutique Hotel Logo"
+            class="h-8"
+          />
           <img src="assets/stars.png" alt="3 estrellas" class="h-3" />
         </div>
       </div>
@@ -65,15 +66,21 @@
   class="relative h-[90vh] md:h-screen flex items-center justify-center pt-16 bg-cover bg-center"
   aria-label="Sección principal del hotel"
   style="background-image: url('assets/hero-img.avif')"
-    id="inicio"
+  id="inicio"
 >
   <!-- Overlay with backdrop blur -->
   <div class="absolute inset-0 bg-black/30 backdrop-blur-sm z-0"></div>
   <div class="relative z-10 text-center px-6 max-w-4xl">
-    <h1 class="text-white text-7xl md:text-9xl font-light serif-title mb-4" data-aos="fade-up">
-      Hermitage
-    </h1>
-    <div class="flex items-center justify-center mb-4" data-aos="fade-up" data-aos-delay="150">
+    <div
+      class="flex flex-col items-center justify-center mb-4"
+      data-aos="fade-up"
+      data-aos-delay="150"
+    >
+      <img
+        src="assets/logos/hotel_logo_blanco.svg"
+        alt="Hermitage Boutique Hotel Logo"
+        class="h-52"
+      />
       <img src="assets/stars.png" alt="3 estrellas" class="h-12" />
     </div>
     <h2
@@ -103,64 +110,6 @@
     </div>
   </div>
 </section>
-
-<section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
-  <!-- Header -->
-  <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
-    <div class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm">
-      <svg class="h-4 w-4 sm:h-5 sm:w-5 text-primary" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z" fill="currentColor"/>
-      </svg>
-      <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
-        Experiencias compartidas
-      </p>
-    </div>
-
-    <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
-      Lo que dicen nuestros huéspedes
-    </h2>
-    <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
-      Reseñas reales para que reserves con confianza.
-    </p>
-  </div>
-
-  <div class="relative">
-    <!-- fades -->
-    <div class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"></div>
-    <div class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"></div>
-
-    <div class="space-y-6 sm:space-y-8">
-      <!-- Row 1 (left) -->
-      <div class="marquee marquee-left flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
-        @for (img of reviewsMarquee; track $index) {
-          <img
-            [src]="'assets/reviews/' + img"
-            alt="Reseña de huésped"
-            loading="lazy"
-            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
-            [attr.aria-hidden]="$index >= reviews.length ? true : null"
-          />
-        }
-      </div>
-
-      <!-- Row 2 (right) -->
-      <div class="marquee marquee-right flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
-        @for (img of reviewsMarquee; track $index) {
-          <img
-            [src]="'assets/reviews/' + img"
-            alt="Reseña de huésped"
-            loading="lazy"
-            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
-            [attr.aria-hidden]="$index >= reviews.length ? true : null"
-          />
-        }
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
 
 <div class="w-full flex justify-center items-center gap-4 my-16">
   <div class="w-16 h-[2px] bg-border"></div>
@@ -343,14 +292,89 @@
   </div>
 </section>
 
+<!-- Reviews Section -->
+<section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
+  <!-- Header -->
+  <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
+    <div
+      class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
+    >
+      <svg
+        class="h-4 w-4 sm:h-5 sm:w-5 text-primary"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z"
+          fill="currentColor"
+        />
+      </svg>
+      <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
+        Experiencias compartidas
+      </p>
+    </div>
+
+    <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
+      Lo que dicen nuestros huéspedes
+    </h2>
+    <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
+      Reseñas reales para que reserves con confianza.
+    </p>
+  </div>
+
+  <div class="relative">
+    <!-- fades -->
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"
+    ></div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"
+    ></div>
+
+    <div class="space-y-6 sm:space-y-8">
+      <!-- Row 1 (left) -->
+      <div
+        class="marquee marquee-left flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform"
+      >
+        @for (img of reviewsMarquee; track $index) {
+          <img
+            [src]="'assets/reviews/' + img"
+            alt="Reseña de huésped"
+            loading="lazy"
+            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
+            [attr.aria-hidden]="$index >= reviews.length ? true : null"
+          />
+        }
+      </div>
+
+      <!-- Row 2 (right) -->
+      <div
+        class="marquee marquee-right flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform"
+      >
+        @for (img of reviewsMarquee; track $index) {
+          <img
+            [src]="'assets/reviews/' + img"
+            alt="Reseña de huésped"
+            loading="lazy"
+            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
+            [attr.aria-hidden]="$index >= reviews.length ? true : null"
+          />
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Contact Section -->
 <section class="py-28 px-6 lg:px-40 bg-bg" id="contact">
   <div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
     <div data-aos="fade-up">
       <h2 class="text-4xl font-bold mb-8">Ubicación</h2>
       <p class="text-text-secondary mb-10 text-lg font-light leading-relaxed">
-        Situados en el corazón de las Sierras de Tandilia, Hermitage es un mundo aparte. A 15
-        minutos de la ciudad, pero a una eternidad del ruido cotidiano.
+        Situados a los pies del parque independencia. Un refugio que se integra con la naturaleza,
+        ofreciendo vistas panorámicas y acceso directo a senderos que invitan a la exploración y el
+        contacto con el entorno serrano.
       </p>
       <div class="rounded-2xl overflow-hidden h-[350px] mb-10 shadow-lg">
         <iframe
@@ -493,9 +517,15 @@
 <!-- Footer -->
 <footer class="py-16 px-6 lg:px-40 bg-bg border-t border-border">
   <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-    <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-primary text-3xl">landscape</span>
-      <span class="font-bold text-xl tracking-tighter">Hermitage</span>
+    <div class="flex flex-col">
+      <div class="flex flex-col items-center">
+        <img
+          src="assets/logos/hotel_logo_negro.svg"
+          alt="Hermitage Boutique Hotel Logo"
+          class="h-16"
+        />
+        <img src="assets/stars.png" alt="3 estrellas" class="h-10" />
+      </div>
     </div>
     <div
       class="flex flex-wrap justify-center gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary/70"
