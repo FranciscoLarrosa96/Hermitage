@@ -256,3 +256,21 @@
     transition: none;
   }
 }
+
+
+/* CTA Parallax */
+.cta-parallax {
+  background-image: url("../assets/bg/bg-1.avif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* <-- el efecto */
+}
+
+/* Mobile fallback: fixed suele fallar en iOS/Android */
+@media (max-width: 768px) {
+  .cta-parallax {
+    background-attachment: scroll;
+    background-position: center;
+  }
+}
