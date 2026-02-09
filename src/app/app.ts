@@ -41,6 +41,8 @@ export class App implements OnInit {
     {
       id: 'hall',
       title: 'Hall',
+      description:
+        'Un espacio elegante pensado para tu descanso, donde cada detalle invita a la relajación y el confort.',
       images: [
         'assets/gallery/hall/1.avif',
         'assets/gallery/hall/2.avif',
@@ -52,6 +54,8 @@ export class App implements OnInit {
     {
       id: 'terrace',
       title: 'Terraza',
+      description:
+        'Disfrutá de vistas panorámicas a las sierras en un ambiente al aire libre con pileta y espacios de descanso.',
       images: [
         'assets/gallery/terraza/1.avif',
         'assets/gallery/terraza/2.avif',
@@ -62,6 +66,8 @@ export class App implements OnInit {
     {
       id: 'parking',
       title: 'Estacionamiento',
+      description:
+        'Estacionamiento cubierto y seguro para tu vehículo, con acceso directo al hotel.',
       images: [
         'assets/gallery/cochera/1.avif',
         'assets/gallery/cochera/2.avif',
@@ -72,6 +78,8 @@ export class App implements OnInit {
     {
       id: 'gym',
       title: 'Gimnasio',
+      description:
+        'Mantené tu rutina de ejercicios en nuestro gimnasio equipado con máquinas modernas y espacios funcionales.',
       images: [
         'assets/gallery/gym/g1.avif',
         'assets/gallery/gym/g2.avif',
