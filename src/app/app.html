@@ -26,8 +26,13 @@
     <div class="flex items-center gap-3">
       <div class="flex flex-col">
         <div class="flex flex-col items-center">
-          <img src="assets/logos/hotel_logo_blanco.svg" alt="Hermitage Hotel Logo" class="h-8" />
-          <img src="assets/stars.png" alt="3 estrellas" class="h-3" />
+          <img
+            src="assets/logos/hotel_logo_blanco.svg"
+            alt="Hermitage Hotel Logo"
+            class="h-8"
+            fetchpriority="high"
+          />
+          <img src="assets/stars.png" alt="3 estrellas" class="h-3" fetchpriority="high" />
         </div>
       </div>
     </div>
@@ -77,8 +82,13 @@
       data-aos="fade-up"
       data-aos-delay="150"
     >
-      <img src="assets/logos/hotel_logo_blanco.svg" alt="Hermitage Hotel Logo" class="h-52" />
-      <img src="assets/stars.png" alt="3 estrellas" class="h-12" />
+      <img
+        src="assets/logos/hotel_logo_blanco.svg"
+        alt="Hermitage Hotel Logo"
+        class="h-52"
+        fetchpriority="high"
+      />
+      <img src="assets/stars.png" alt="3 estrellas" class="h-12" fetchpriority="high" />
     </div>
     <h2
       class="text-white text-lg md:text-xl font-light tracking-[0.3em] uppercase mb-12"
@@ -104,7 +114,7 @@
       <div
         class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
       >
-        <img src="assets/icons/bed.svg" alt="" />
+        <img src="assets/icons/bed.svg" alt="Icono de cama" loading="lazy" decoding="async" />
         <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
           Habitaciones
         </p>
@@ -173,6 +183,7 @@
                   alt=""
                   aria-hidden="true"
                   class="absolute -top-6 -right-2 h-28 w-28 opacity-[0.06] select-none pointer-events-none"
+                  loading="lazy"
                 />
 
                 <!-- Badge -->
@@ -185,6 +196,7 @@
                       [alt]="section.title + ' icon'"
                       class="h-5 w-5 opacity-80 object-contain"
                       [class.brightness-0]="section.icon.endsWith('.svg')"
+                      loading="lazy"
                     />
                   </span>
 
@@ -212,6 +224,7 @@
                           [alt]="f.label"
                           class="h-5 w-5 opacity-80 object-contain"
                           [class.brightness-0]="f.icon.endsWith('.svg')"
+                          loading="lazy"
                         />
                       </span>
                       <span class="text-sm font-semibold text-text/80">{{ f.label }}</span>
@@ -329,6 +342,8 @@
                 [src]="section.images[0]"
                 [alt]="section.title + ' - vista principal'"
                 class="gallery-image"
+                loading="lazy"
+                decoding="async"
               />
 
               <!-- Overlay con contador de fotos -->
@@ -365,6 +380,8 @@
               alt=""
               aria-hidden="true"
               class="absolute -top-8 -right-4 h-32 w-32 opacity-[0.04] select-none pointer-events-none"
+              loading="lazy"
+              decoding="async"
             />
 
             <!-- Badge -->
@@ -372,7 +389,13 @@
               <span
                 class="h-12 w-12 rounded-2xl bg-white/70 backdrop-blur border border-black/5 shadow-sm flex items-center justify-center"
               >
-                <img [src]="section.icon" [alt]="section.title" class="h-6 w-6 opacity-80" />
+                <img
+                  [src]="section.icon"
+                  [alt]="section.title"
+                  class="h-6 w-6 opacity-80"
+                  loading="lazy"
+                  decoding="async"
+                />
               </span>
               <span class="text-xs uppercase tracking-[0.35em] text-primary font-extrabold">
                 {{ section.title }}
@@ -477,10 +500,9 @@
         @for (img of reviewsMarquee; track $index) {
           <img
             [src]="'assets/reviews/' + img"
-            [attr.loading]="'eager'"
-            [attr.decoding]="'async'"
             alt="Reseña de huésped"
             loading="lazy"
+            decoding="async"
             class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
             [attr.aria-hidden]="$index >= reviews.length ? true : null"
           />
@@ -496,6 +518,7 @@
             [src]="'assets/reviews/' + img"
             alt="Reseña de huésped"
             loading="lazy"
+            decoding="async"
             class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
             [attr.aria-hidden]="$index >= reviews.length ? true : null"
           />
@@ -718,8 +741,20 @@
       <!-- Logo -->
       <div class="flex justify-center md:justify-start">
         <div class="flex flex-col items-center">
-          <img src="assets/logos/hotel_logo_negro.svg" alt="Hermitage Hotel" class="h-16" />
-          <img src="assets/stars.png" alt="3 estrellas" class="h-10 mt-1" />
+          <img
+            src="assets/logos/hotel_logo_negro.svg"
+            alt="Hermitage Boutique Hotel"
+            class="h-16"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="assets/stars.png"
+            alt="3 estrellas"
+            class="h-10 mt-1"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
 
