@@ -122,22 +122,15 @@
   <div class="w-16 h-[2px] bg-border"></div>
 </div>
 
-<!-- Rooms Section (Gallery Style) -->
-<section class="py-14 sm:py-16 lg:py-20 bg-bg" aria-label="Habitaciones" id="rooms">
+<!-- Rooms -->
+<section id="rooms" aria-label="Habitaciones" class="py-14 sm:py-16 lg:py-20 bg-bg">
   <div class="max-w-7xl mx-auto px-4">
     <!-- Header -->
     <div class="text-center mb-10 sm:mb-12" data-aos="fade-down">
       <div
         class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
       >
-        <svg
-          class="h-4 w-4 sm:h-5 sm:w-5 text-primary"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M4 11h16v9H4v-9zm2-7h12v5H6V4z" />
-        </svg>
+        <span class="h-2 w-2 rounded-full bg-primary"></span>
         <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
           Rooms
         </p>
@@ -146,6 +139,7 @@
       <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
         Elegí tu experiencia
       </h2>
+
       <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
         Standard, Superior o Suite: misma base de servicios, distinta sensación de espacio y
         confort.
@@ -158,13 +152,15 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <!-- Imagen protagonista -->
           <div class="lg:col-span-7">
-            <div
-              class="gallery-card aspect-[16/10]"
+            <button
+              type="button"
+              class="gallery-card aspect-[16/10] w-full text-left"
               [attr.data-aos]="'fade-up'"
-              (click)="openLightbox(section.images[0], section.images)"
+              (click)="openLightbox(section.images[0], section.images, 'universalLightbox')"
+              aria-label="Abrir galería de habitación"
             >
               <img [src]="section.images[0]" [alt]="section.title" class="gallery-image" />
-            </div>
+            </button>
           </div>
 
           <!-- Texto -->
@@ -178,7 +174,7 @@
                 class="absolute -top-6 -right-2 h-28 w-28 opacity-[0.06] select-none pointer-events-none"
               />
 
-              <!-- Badge (icon + label) -->
+              <!-- Badge -->
               <div class="inline-flex items-center gap-3 mb-4">
                 <span
                   class="h-11 w-11 rounded-2xl bg-white/70 backdrop-blur border border-black/5 shadow-sm flex items-center justify-center"
@@ -195,7 +191,6 @@
                 </span>
               </div>
 
-              <!-- Description -->
               <p class="text-lg text-text/80 leading-relaxed max-w-lg">
                 {{ section.description }}
               </p>
@@ -218,7 +213,7 @@
                 }
               </ul>
 
-              <!-- Nota extra (solo para Suite / Superior si querés) -->
+              <!-- Nota extra -->
               @if (section.id === 'superior') {
                 <p class="mt-3 text-sm text-text/60 max-w-lg">
                   Algunas habitaciones cuentan con balcón y vista a la plaza (según disponibilidad).
@@ -229,20 +224,31 @@
                   Incluye frigobar y jacuzzi con hidromasaje.
                 </p>
               }
+
+              <div class="mt-6">
+                <a
+                  href="#contact"
+                  class="inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-3 text-white font-extrabold shadow-sm hover:opacity-95 transition"
+                >
+                  Consultar disponibilidad
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Grid secundario -->
           <div class="lg:col-span-12 grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
             @for (img of section.images.slice(1); track img; let idx = $index) {
-              <div
-                class="gallery-card"
+              <button
+                type="button"
+                class="gallery-card w-full"
                 [attr.data-aos]="'fade-up'"
                 [attr.data-aos-delay]="idx * 80"
-                (click)="openLightbox(img, section.images)"
+                (click)="openLightbox(img, section.images, 'universalLightbox')"
+                aria-label="Abrir imagen"
               >
                 <img [src]="img" [alt]="section.title" class="gallery-image" />
-              </div>
+              </button>
             }
           </div>
         </div>
@@ -264,7 +270,6 @@
         }
       }
 
-      <!-- Servicios comunes (opcional) -->
       <p class="mt-2 text-xs text-text/50 text-center max-w-3xl mx-auto">
         Todas las habitaciones incluyen desayuno, cochera, gimnasio y Wi-Fi. La pileta es natural y
         está disponible en temporada (mediados de noviembre a después de Semana Santa).
@@ -272,59 +277,6 @@
     </div>
   </div>
 </section>
-
-<!-- Lightbox (reutilizable) -->
-@if (imagenSeleccionada) {
-  <div
-    id="roomsLightbox"
-    class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center"
-    (click)="cerrarLightboxRooms()"
-    (keydown.escape)="cerrarLightboxRooms()"
-    tabindex="0"
-    role="dialog"
-    aria-modal="true"
-  >
-    <button
-      class="absolute left-4 text-white text-5xl hover:text-primary transition z-[9999] select-none"
-      (click)="anterior($event)"
-      aria-label="Anterior"
-      type="button"
-    >
-      ‹
-    </button>
-
-    <img
-      [src]="imagenSeleccionada"
-      alt="Imagen fullscreen"
-      class="max-w-[92vw] max-h-[88vh] object-contain rounded-2xl shadow-2xl"
-      (click)="$event.stopPropagation()"
-    />
-
-    <button
-      class="absolute right-4 text-white text-5xl hover:text-primary transition z-[9999] select-none"
-      (click)="siguiente($event)"
-      aria-label="Siguiente"
-      type="button"
-    >
-      ›
-    </button>
-
-    <div
-      class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-xs bg-black/40 px-3 py-1 rounded-full"
-    >
-      {{ lightboxIndex + 1 }} / {{ lightboxImages.length }}
-    </div>
-
-    <button
-      class="absolute top-4 right-4 text-white/80 hover:text-white text-3xl transition"
-      (click)="cerrarLightboxRooms()"
-      aria-label="Cerrar"
-      type="button"
-    >
-      ✕
-    </button>
-  </div>
-}
 
 <div class="w-full flex justify-center items-center gap-4 my-16">
   <div class="w-16 h-[2px] bg-border"></div>
@@ -367,19 +319,19 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <!-- Imagen protagonista -->
           <div class="lg:col-span-7">
-            <div
-              class="gallery-card aspect-[16/10]"
+            <button
+              type="button"
+              class="gallery-card aspect-[16/10] w-full text-left"
               [attr.data-aos]="'fade-up'"
-              (click)="openLightbox(section.images[0], section.images)"
+              (click)="openLightbox(section.images[0], section.images, 'universalLightbox')"
             >
               <img [src]="section.images[0]" [alt]="section.title" class="gallery-image" />
-            </div>
+            </button>
           </div>
 
           <!-- Texto -->
           <div class="lg:col-span-5">
             <div class="relative">
-              <!-- Watermark -->
               <img
                 [src]="section.icon"
                 alt=""
@@ -387,7 +339,6 @@
                 class="absolute -top-6 -right-2 h-28 w-28 opacity-[0.06] select-none pointer-events-none"
               />
 
-              <!-- Badge (icon + label) -->
               <div class="inline-flex items-center gap-3 mb-4">
                 <span
                   class="h-11 w-11 rounded-2xl bg-white/70 backdrop-blur border border-black/5 shadow-sm flex items-center justify-center"
@@ -404,7 +355,6 @@
                 </span>
               </div>
 
-              <!-- Description -->
               <p class="text-lg text-text/80 leading-relaxed max-w-lg">
                 {{ section.description }}
               </p>
@@ -414,17 +364,19 @@
           <!-- Grid secundario -->
           <div class="lg:col-span-12 grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
             @for (img of section.images.slice(1); track img; let idx = $index) {
-              <div
-                class="gallery-card"
+              <button
+                type="button"
+                class="gallery-card w-full"
                 [attr.data-aos]="'fade-up'"
                 [attr.data-aos-delay]="idx * 80"
-                (click)="openLightbox(img, section.images)"
+                (click)="openLightbox(img, section.images, 'universalLightbox')"
               >
                 <img [src]="img" [alt]="section.title" class="gallery-image" />
-              </div>
+              </button>
             }
           </div>
         </div>
+
         @if (!last) {
           <div class="my-12 sm:my-14 lg:my-16 flex items-center justify-center">
             <div
@@ -444,49 +396,6 @@
     </div>
   </div>
 </section>
-
-<!-- Lightbox -->
-@if (lightboxOpen()) {
-  <div class="lightbox-backdrop" (click)="closeLightbox()">
-    <button class="lightbox-close" (click)="closeLightbox()" aria-label="Cerrar galería">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    </button>
-
-    <button
-      class="lightbox-nav lightbox-prev"
-      (click)="previousImage(); $event.stopPropagation()"
-      aria-label="Imagen anterior"
-    >
-      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-
-    <div class="lightbox-content" (click)="$event.stopPropagation()">
-      <img [src]="currentImage()" alt="Imagen ampliada" class="lightbox-image" />
-      <div class="lightbox-counter">
-        {{ currentImageIndex() + 1 }} / {{ currentGalleryImages().length }}
-      </div>
-    </div>
-
-    <button
-      class="lightbox-nav lightbox-next"
-      (click)="nextImage(); $event.stopPropagation()"
-      aria-label="Imagen siguiente"
-    >
-      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-  </div>
-}
 
 <!-- Reviews Section -->
 <section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
@@ -750,3 +659,112 @@
     </p>
   </div>
 </footer>
+
+<!-- UNIVERSAL LIGHTBOX (Rooms + Gallery) -->
+@if (lightboxOpen()) {
+  <div
+    id="universalLightbox"
+    class="fixed inset-0 z-[9999]"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+  >
+    <!-- Backdrop -->
+    <button
+      type="button"
+      class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"
+      (click)="closeLightbox()"
+      aria-label="Cerrar galería"
+    ></button>
+
+    <!-- Container -->
+    <div class="relative h-full w-full flex items-center justify-center p-4 sm:p-6">
+      <div class="relative w-full max-w-6xl">
+        <!-- Top bar -->
+        <div class="mb-3 flex items-center justify-between gap-3 text-white">
+          <div class="text-xs sm:text-sm text-white/80 font-semibold">
+            {{ lightboxIndex() + 1 }} / {{ lightboxImages().length }}
+          </div>
+
+          <button
+            type="button"
+            class="inline-flex items-center justify-center h-10 w-10 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 transition"
+            (click)="closeLightbox()"
+            aria-label="Cerrar"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path
+                d="M18.3 5.7a1 1 0 0 0-1.4 0L12 10.6 7.1 5.7a1 1 0 1 0-1.4 1.4l4.9 4.9-4.9 4.9a1 1 0 1 0 1.4 1.4l4.9-4.9 4.9 4.9a1 1 0 0 0 1.4-1.4L13.4 12l4.9-4.9a1 1 0 0 0 0-1.4z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Image stage -->
+        <div
+          class="relative overflow-hidden rounded-3xl border border-white/10 bg-black/30 shadow-2xl"
+        >
+          <img
+            [src]="selectedImage()"
+            alt="Imagen ampliada"
+            class="w-full max-h-[72vh] object-contain bg-black/20"
+            loading="eager"
+            decoding="async"
+            (click)="$event.stopPropagation()"
+          />
+
+          <!-- Prev / Next -->
+          <button
+            type="button"
+            class="absolute left-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 text-white transition"
+            (click)="previousImage($event)"
+            aria-label="Anterior"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5 mx-auto" fill="currentColor" aria-hidden="true">
+              <path
+                d="M15.5 19a1 1 0 0 1-.7-.3l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 1 1 1.4 1.4L11 12l4.9 4.9A1 1 0 0 1 15.5 19z"
+              ></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="absolute right-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 text-white transition"
+            (click)="nextImage($event)"
+            aria-label="Siguiente"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5 mx-auto" fill="currentColor" aria-hidden="true">
+              <path
+                d="M8.5 19a1 1 0 0 1-.7-1.7L12.6 12 7.8 7.1a1 1 0 1 1 1.4-1.4l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 0 1-.7.3z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="mt-3 flex gap-2 overflow-x-auto pb-1">
+          @for (img of lightboxImages(); track img; let i = $index) {
+            <button
+              type="button"
+              class="shrink-0 overflow-hidden rounded-2xl border transition"
+              [class.border-white]="i === lightboxIndex()"
+              [class.border-white/20]="i !== lightboxIndex()"
+              (click)="goToImage(i, $event)"
+              aria-label="Ir a imagen"
+            >
+              <img
+                [src]="img"
+                alt="Thumb"
+                class="h-16 w-24 object-cover opacity-90 hover:opacity-100 transition"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+          }
+        </div>
+
+        <p class="mt-2 text-xs text-white/60">Tip: flechas ◀ ▶ o ESC para cerrar.</p>
+      </div>
+    </div>
+  </div>
+}

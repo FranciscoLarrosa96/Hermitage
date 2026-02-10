@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, OnInit, signal, inject, computed } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
@@ -7,8 +7,8 @@ type RoomCategory = {
   name: string;
   tagline: string;
   hero: string;
-  thumbs: string[]; // 3 mini previews
-  gallery: string[]; // álbum completo por categoría
+  thumbs: string[];
+  gallery: string[];
   features: { icon: string; label: string }[];
 };
 
@@ -27,12 +27,16 @@ export class App implements OnInit {
   private readonly titleService = inject(Title);
   protected readonly title = signal('hermitage');
   protected readonly isScrolled = signal(false);
+  // ✅ Lightbox universal (sirve para gallery y rooms)
   protected readonly lightboxOpen = signal(false);
-  protected readonly currentImage = signal('');
-  protected readonly currentImageIndex = signal(0);
-  protected readonly currentGalleryImages = signal<string[]>([]);
-  lightboxImages: string[] = [];
-  lightboxIndex = 0;
+  protected readonly lightboxImages = signal<string[]>([]);
+  protected readonly lightboxIndex = signal(0);
+
+  protected readonly selectedImage = computed(() => {
+    const imgs = this.lightboxImages();
+    const idx = this.lightboxIndex();
+    return imgs[idx] ?? '';
+  });
   public readonly reviews = [
     'review1.png',
     'review2.png',
@@ -238,47 +242,53 @@ export class App implements OnInit {
     const scrollPosition = window.scrollY;
     this.isScrolled.set(scrollPosition > 700);
   }
-  /**
-   * Abre el lightbox con la imagen seleccionada
-   */
-  protected openLightbox(imageSrc: string, images: string[]): void {
-    this.currentImage.set(imageSrc);
-    this.currentGalleryImages.set(images);
-    this.currentImageIndex.set(images.indexOf(imageSrc));
+  // ---------------- LIGHTBOX (universal) ----------------
+  protected openLightbox(imageSrc: string, images: string[], focusId?: string): void {
+    if (!images?.length) return;
+
+    const idx = images.indexOf(imageSrc);
+    this.lightboxImages.set(images);
+    this.lightboxIndex.set(idx >= 0 ? idx : 0);
+
     this.lightboxOpen.set(true);
-    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('overflow-hidden'); // lock scroll (mejor que body)
+
+    // opcional: foco para accesibilidad
+    queueMicrotask(() => {
+      if (!focusId) return;
+      const el = document.getElementById(focusId);
+      el?.focus();
+    });
   }
 
-  /**
-   * Cierra el lightbox
-   */
   protected closeLightbox(): void {
     this.lightboxOpen.set(false);
-    document.body.style.overflow = '';
+    this.lightboxImages.set([]);
+    this.lightboxIndex.set(0);
+    document.documentElement.classList.remove('overflow-hidden');
   }
 
-  /**
-   * Navega a la imagen anterior en el lightbox
-   */
-  protected previousImage(): void {
-    const images = this.currentGalleryImages();
-    const currentIndex = this.currentImageIndex();
-    const newIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
-    this.currentImageIndex.set(newIndex);
-    this.currentImage.set(images[newIndex]);
+  protected nextImage(ev?: Event): void {
+    ev?.stopPropagation();
+    const imgs = this.lightboxImages();
+    if (!imgs.length) return;
+    this.lightboxIndex.set((this.lightboxIndex() + 1) % imgs.length);
   }
 
-  /**
-   * Navega a la imagen siguiente en el lightbox
-   */
-  protected nextImage(): void {
-    const images = this.currentGalleryImages();
-    const currentIndex = this.currentImageIndex();
-    const newIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
-    this.currentImageIndex.set(newIndex);
-    this.currentImage.set(images[newIndex]);
+  protected previousImage(ev?: Event): void {
+    ev?.stopPropagation();
+    const imgs = this.lightboxImages();
+    if (!imgs.length) return;
+    this.lightboxIndex.set((this.lightboxIndex() - 1 + imgs.length) % imgs.length);
   }
 
+  protected goToImage(i: number, ev?: Event): void {
+    ev?.stopPropagation();
+    const imgs = this.lightboxImages();
+    if (!imgs.length) return;
+    const idx = Math.max(0, Math.min(i, imgs.length - 1));
+    this.lightboxIndex.set(idx);
+  }
   /**
    * Maneja la navegación del lightbox con el teclado
    */
@@ -350,43 +360,5 @@ export class App implements OnInit {
       easing: 'ease-in-out',
       once: false,
     });
-  }
-
-  get imagenSeleccionada(): string | null {
-    return this.lightboxOpen() ? this.lightboxImages[this.lightboxIndex] : null;
-  }
-
-  openLightboxRooms(img: string, images: string[]) {
-    this.lightboxImages = images;
-    const idx = images.indexOf(img);
-    this.lightboxIndex = idx >= 0 ? idx : 0;
-
-    this.lightboxOpen.set(true);
-    document.body.style.overflow = 'hidden';
-
-    queueMicrotask(() => {
-      const el = document.getElementById('roomsLightbox');
-      el?.focus();
-    });
-  }
-
-  cerrarLightboxRooms() {
-    this.lightboxOpen.set(false);
-    this.lightboxImages = [];
-    this.lightboxIndex = 0;
-    document.body.style.overflow = '';
-  }
-
-  siguiente(ev?: Event) {
-    ev?.stopPropagation();
-    if (!this.lightboxImages.length) return;
-    this.lightboxIndex = (this.lightboxIndex + 1) % this.lightboxImages.length;
-  }
-
-  anterior(ev?: Event) {
-    ev?.stopPropagation();
-    if (!this.lightboxImages.length) return;
-    this.lightboxIndex =
-      (this.lightboxIndex - 1 + this.lightboxImages.length) % this.lightboxImages.length;
   }
 }
