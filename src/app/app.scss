@@ -274,3 +274,17 @@
     background-position: center;
   }
 }
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(0,0,0,.08);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

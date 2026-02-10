@@ -2,6 +2,16 @@ import { Component, OnInit, signal, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
+type RoomCategory = {
+  id: string;
+  name: string;
+  tagline: string;
+  hero: string;
+  thumbs: string[]; // 3 mini previews
+  gallery: string[]; // álbum completo por categoría
+  features: { icon: string; label: string }[];
+};
+
 @Component({
   selector: 'app-root',
   imports: [],
@@ -21,7 +31,8 @@ export class App implements OnInit {
   protected readonly currentImage = signal('');
   protected readonly currentImageIndex = signal(0);
   protected readonly currentGalleryImages = signal<string[]>([]);
-
+  lightboxImages: string[] = [];
+  lightboxIndex = 0;
   public readonly reviews = [
     'review1.png',
     'review2.png',
@@ -90,6 +101,127 @@ export class App implements OnInit {
         'assets/gallery/gym/g3.avif',
         'assets/gallery/gym/g4.avif',
         'assets/gallery/gym/g5.avif',
+      ],
+    },
+  ];
+
+  roomCategories: RoomCategory[] = [
+    {
+      id: 'standard',
+      name: 'Standard',
+      tagline: 'Cómoda y funcional, ideal para una estadía tranquila.',
+      hero: 'assets/rooms/standard/hero.avif',
+      thumbs: [
+        'assets/rooms/standard/t1.webp',
+        'assets/rooms/standard/t2.avif',
+        'assets/rooms/standard/t3.avif',
+      ],
+      gallery: [
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
+        // ...todas las standard (curadas)
+      ],
+      features: [
+        { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
+        { icon: 'assets/icons/shower.svg', label: 'Baño privado' },
+        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
+      ],
+    },
+    {
+      id: 'superior',
+      name: 'Superior',
+      tagline: 'Más amplia y luminosa. Algunas con balcón y vista a la plaza.',
+      hero: 'assets/rooms/superior/hero.jpg',
+      thumbs: [
+        'assets/rooms/superior/t1.jpg',
+        'assets/rooms/superior/t2.jpg',
+        'assets/rooms/superior/t3.jpg',
+      ],
+      gallery: [
+        'assets/rooms/superior/1.jpg',
+        'assets/rooms/superior/2.jpg',
+        'assets/rooms/superior/3.jpg',
+      ],
+      features: [
+        { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
+        { icon: 'assets/icons/terrace.svg', label: 'Balcón (según disp.)' },
+        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
+      ],
+    },
+    {
+      id: 'suite',
+      name: 'Suite',
+      tagline: 'Más moderna y amplia, con frigobar y jacuzzi con hidromasaje.',
+      hero: 'assets/rooms/suite/hero.jpg',
+      thumbs: [
+        'assets/rooms/suite/t1.jpg',
+        'assets/rooms/suite/t2.jpg',
+        'assets/rooms/suite/t3.jpg',
+      ],
+      gallery: ['assets/rooms/suite/1.jpg', 'assets/rooms/suite/2.jpg', 'assets/rooms/suite/3.jpg'],
+      features: [
+        { icon: 'assets/icons/bed.svg', label: 'Cama más amplia' },
+        { icon: 'assets/icons/frigobar.svg', label: 'Frigobar' },
+        { icon: 'assets/icons/jacuzzi.png', label: 'Jacuzzi / hidromasaje' },
+      ],
+    },
+  ];
+  roomsGallery = [
+    {
+      id: 'standard',
+      title: 'Standard',
+      icon: 'assets/icons/bed.svg',
+      description: 'Cómoda y funcional, ideal para una estadía tranquila.',
+      images: [
+        'assets/rooms/standard/hero.avif',
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
+      ],
+      features: [
+        { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
+        { icon: 'assets/icons/shower.svg', label: 'Baño privado' },
+        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
+        { icon: 'assets/icons/air.svg', label: 'Aire acondicionado' },
+      ],
+    },
+
+    {
+      id: 'superior',
+      title: 'Superior',
+      icon: 'assets/icons/terrace.svg',
+      description: 'Más amplia y luminosa. Algunas con balcón y vista a la plaza.',
+      images: [
+        'assets/rooms/superior/hero.jpg',
+        'assets/rooms/superior/1.jpg',
+        'assets/rooms/superior/2.jpg',
+        'assets/rooms/superior/3.jpg',
+      ],
+      features: [
+        { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
+        { icon: 'assets/icons/terrace.svg', label: 'Balcón (según disp.)' },
+        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
+        { icon: 'assets/icons/frigobar.svg', label: 'Frigobar' },
+      ],
+    },
+
+    {
+      id: 'suite',
+      title: 'Suite',
+      icon: 'assets/icons/jacuzzi.png',
+      description: 'Más moderna y amplia, con frigobar y jacuzzi con hidromasaje.',
+      images: [
+        'assets/rooms/suite/hero.jpg',
+        'assets/rooms/suite/1.jpg',
+        'assets/rooms/suite/2.jpg',
+        'assets/rooms/suite/3.jpg',
+      ],
+      features: [
+        { icon: 'assets/icons/bed.svg', label: 'Cama más amplia' },
+        { icon: 'assets/icons/frigobar.svg', label: 'Frigobar' },
+        { icon: 'assets/icons/jacuzzi.png', label: 'Jacuzzi / hidromasaje' },
+        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
       ],
     },
   ];
@@ -218,5 +350,43 @@ export class App implements OnInit {
       easing: 'ease-in-out',
       once: false,
     });
+  }
+
+  get imagenSeleccionada(): string | null {
+    return this.lightboxOpen() ? this.lightboxImages[this.lightboxIndex] : null;
+  }
+
+  openLightboxRooms(img: string, images: string[]) {
+    this.lightboxImages = images;
+    const idx = images.indexOf(img);
+    this.lightboxIndex = idx >= 0 ? idx : 0;
+
+    this.lightboxOpen.set(true);
+    document.body.style.overflow = 'hidden';
+
+    queueMicrotask(() => {
+      const el = document.getElementById('roomsLightbox');
+      el?.focus();
+    });
+  }
+
+  cerrarLightboxRooms() {
+    this.lightboxOpen.set(false);
+    this.lightboxImages = [];
+    this.lightboxIndex = 0;
+    document.body.style.overflow = '';
+  }
+
+  siguiente(ev?: Event) {
+    ev?.stopPropagation();
+    if (!this.lightboxImages.length) return;
+    this.lightboxIndex = (this.lightboxIndex + 1) % this.lightboxImages.length;
+  }
+
+  anterior(ev?: Event) {
+    ev?.stopPropagation();
+    if (!this.lightboxImages.length) return;
+    this.lightboxIndex =
+      (this.lightboxIndex - 1 + this.lightboxImages.length) % this.lightboxImages.length;
   }
 }
