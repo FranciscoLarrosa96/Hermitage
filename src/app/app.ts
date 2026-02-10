@@ -109,68 +109,6 @@ export class App implements OnInit {
     },
   ];
 
-  roomCategories: RoomCategory[] = [
-    {
-      id: 'standard',
-      name: 'Standard',
-      tagline: 'Cómoda y funcional, ideal para una estadía tranquila.',
-      hero: 'assets/rooms/standard/hero.avif',
-      thumbs: [
-        'assets/rooms/standard/t1.webp',
-        'assets/rooms/standard/t2.avif',
-        'assets/rooms/standard/t3.avif',
-      ],
-      gallery: [
-        'assets/rooms/standard/1.avif',
-        'assets/rooms/standard/2.avif',
-        'assets/rooms/standard/3.avif',
-        // ...todas las standard (curadas)
-      ],
-      features: [
-        { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
-        { icon: 'assets/icons/shower.svg', label: 'Baño privado' },
-        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
-      ],
-    },
-    {
-      id: 'superior',
-      name: 'Superior',
-      tagline: 'Más amplia y luminosa. Algunas con balcón y vista a la plaza.',
-      hero: 'assets/rooms/superior/hero.jpg',
-      thumbs: [
-        'assets/rooms/superior/t1.jpg',
-        'assets/rooms/superior/t2.jpg',
-        'assets/rooms/superior/t3.jpg',
-      ],
-      gallery: [
-        'assets/rooms/superior/1.jpg',
-        'assets/rooms/superior/2.jpg',
-        'assets/rooms/superior/3.jpg',
-      ],
-      features: [
-        { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
-        { icon: 'assets/icons/terrace.svg', label: 'Balcón (según disp.)' },
-        { icon: 'assets/icons/wifi.svg', label: 'Wi-Fi' },
-      ],
-    },
-    {
-      id: 'suite',
-      name: 'Suite',
-      tagline: 'Más moderna y amplia, con frigobar y jacuzzi con hidromasaje.',
-      hero: 'assets/rooms/suite/hero.jpg',
-      thumbs: [
-        'assets/rooms/suite/t1.jpg',
-        'assets/rooms/suite/t2.jpg',
-        'assets/rooms/suite/t3.jpg',
-      ],
-      gallery: ['assets/rooms/suite/1.jpg', 'assets/rooms/suite/2.jpg', 'assets/rooms/suite/3.jpg'],
-      features: [
-        { icon: 'assets/icons/bed.svg', label: 'Cama más amplia' },
-        { icon: 'assets/icons/frigobar.svg', label: 'Frigobar' },
-        { icon: 'assets/icons/jacuzzi.png', label: 'Jacuzzi / hidromasaje' },
-      ],
-    },
-  ];
   roomsGallery = [
     {
       id: 'standard',
@@ -179,6 +117,21 @@ export class App implements OnInit {
       description: 'Cómoda y funcional, ideal para una estadía tranquila.',
       images: [
         'assets/rooms/standard/hero.avif',
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
+        'assets/rooms/standard/1.avif',
+        'assets/rooms/standard/2.avif',
+        'assets/rooms/standard/3.avif',
         'assets/rooms/standard/1.avif',
         'assets/rooms/standard/2.avif',
         'assets/rooms/standard/3.avif',
