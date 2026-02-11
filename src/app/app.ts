@@ -1,4 +1,12 @@
-import { Component, OnInit, signal, inject, computed } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  signal,
+  inject,
+  computed,
+  ElementRef,
+} from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
@@ -22,15 +30,18 @@ type RoomCategory = {
     '(window:keydown)': 'onKeyDown($event)',
   },
 })
-export class App implements OnInit {
+export class App implements OnInit, AfterViewInit {
   private readonly meta = inject(Meta);
   private readonly titleService = inject(Title);
+  private readonly elementRef = inject(ElementRef);
   protected readonly title = signal('hermitage');
   protected readonly isScrolled = signal(false);
+  protected readonly revealedHeroImages = signal<Set<string>>(new Set());
   // ✅ Lightbox universal (sirve para gallery y rooms)
   protected readonly lightboxOpen = signal(false);
   protected readonly lightboxImages = signal<string[]>([]);
   protected readonly lightboxIndex = signal(0);
+  private heroObserver?: IntersectionObserver;
 
   protected readonly selectedImage = computed(() => {
     const imgs = this.lightboxImages();
@@ -115,8 +126,8 @@ export class App implements OnInit {
       title: 'Standard',
       icon: 'assets/icons/bed.svg',
       description: 'Cómoda y funcional, ideal para una estadía tranquila.',
+      hero: 'assets/rooms/standard/hero.avif',
       images: [
-        'assets/rooms/standard/hero.avif',
         'assets/rooms/standard/2.avif',
         'assets/rooms/standard/3.avif',
         'assets/rooms/standard/4.avif',
@@ -134,11 +145,11 @@ export class App implements OnInit {
       title: 'Superior',
       icon: 'assets/icons/terrace.svg',
       description: 'Más amplia y luminosa. Algunas con balcón y vista a la plaza.',
+      hero: 'assets/rooms/superior/hero.avif',
       images: [
-        'assets/rooms/superior/hero.avif',
         'assets/rooms/superior/1.avif',
-        'assets/rooms/superior/2.avif',
         'assets/rooms/superior/3.avif',
+        'assets/rooms/superior/4.avif',
       ],
       features: [
         { icon: 'assets/icons/bed.svg', label: 'Cama matrimonial' },
@@ -153,8 +164,8 @@ export class App implements OnInit {
       title: 'Suite',
       icon: 'assets/icons/jacuzzi.png',
       description: 'Más moderna y amplia, con frigobar y jacuzzi con hidromasaje.',
+      hero: 'assets/rooms/suite/hero.avif',
       images: [
-        'assets/rooms/suite/hero.avif',
         'assets/rooms/suite/2.avif',
         'assets/rooms/suite/3.avif',
         'assets/rooms/suite/4.avif',
@@ -173,6 +184,47 @@ export class App implements OnInit {
   ngOnInit() {
     this.initSEO();
     this.initAOS();
+  }
+
+  ngAfterViewInit() {
+    // SSR safety
+    if (typeof window === 'undefined') return;
+
+    const heroes: NodeListOf<HTMLElement> =
+      this.elementRef.nativeElement.querySelectorAll('.js-hero-wipe');
+
+    if (!heroes.length) return;
+
+    this.heroObserver = new IntersectionObserver(
+      (entries, obs) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          (entry.target as HTMLElement).classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      },
+      {
+        root: null,
+        threshold: 0.25,
+        rootMargin: '0px 0px -10% 0px',
+      },
+    );
+
+    heroes.forEach((el) => this.heroObserver!.observe(el));
+  }
+
+  /**
+   * Verifica si una imagen hero específica ya fue revelada
+   */
+  protected isHeroRevealed(imageId: string): boolean {
+    return this.revealedHeroImages().has(imageId);
+  }
+
+  /**
+   * Retorna todas las imágenes de una room (hero + resto) para el lightbox
+   */
+  protected getAllRoomImages(section: any): string[] {
+    return [section.hero, ...section.images];
   }
 
   /**
