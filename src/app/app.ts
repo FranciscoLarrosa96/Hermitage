@@ -330,10 +330,26 @@ export class App implements OnInit {
         'Descubre el refugio perfecto en las sierras de Tandil. Hotel de lujo con spa, habitaciones premium y experiencias wellness únicas.',
     });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({
+      property: 'og:image',
+      content: 'https://hermitagetandil.com/assets/previewh.avif',
+    });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({ property: 'og:url', content: 'https://hermitagetandil.com' });
 
     // Twitter Card
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: 'Hermitage Hotel Tandil' });
+    this.meta.updateTag({
+      name: 'twitter:description',
+      content:
+        'Descubre el refugio perfecto en las sierras de Tandil. Hotel de lujo con spa, habitaciones premium y experiencias wellness únicas.',
+    });
+    this.meta.updateTag({
+      name: 'twitter:image',
+      content: 'https://hermitagetandil.com/assets/previewh.avif',
+    });
   }
 
   /**
