@@ -1,4 +1,4 @@
-# Hermitage Boutique Hotel - .htaccess Configuration
+# Hermitage Hotel - .htaccess Configuration
 
 # Habilitar compresión GZIP
 <IfModule mod_deflate.c>

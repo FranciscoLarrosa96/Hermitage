@@ -1,4 +1,4 @@
-# robots.txt para Hermitage Boutique Hotel
+# robots.txt para Hermitage Hotel
 User-agent: *
 Allow: /
 Disallow: /admin/

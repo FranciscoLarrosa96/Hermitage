@@ -304,36 +304,36 @@ export class App implements OnInit {
    */
   private initSEO(): void {
     // Configurar título
-    this.titleService.setTitle('Hermitage Boutique Hotel Tandil | Hotel de Lujo en las Sierras');
+    this.titleService.setTitle('Hermitage Hotel Tandil | Hotel de Lujo en las Sierras');
 
     // Actualizar meta tags
     this.meta.updateTag({
       name: 'description',
       content:
-        'Hermitage Boutique Hotel en Tandil, Argentina. Hotel de lujo con spa, habitaciones premium y vistas a las sierras. Experiencia única de descanso y bienestar en la naturaleza.',
+        'Hermitage Hotel en Tandil, Argentina. Hotel de lujo con spa, habitaciones premium y vistas a las sierras. Experiencia única de descanso y bienestar en la naturaleza.',
     });
 
     this.meta.updateTag({
       name: 'keywords',
       content:
-        'hotel tandil, hotel boutique tandil, hotel lujo tandil, spa tandil, turismo tandil, sierras tandil, alojamiento tandil, hotel 5 estrellas, wellness tandil, escapada romantica tandil',
+        'hotel tandil, hotel tandil, hotel lujo tandil, spa tandil, turismo tandil, sierras tandil, alojamiento tandil, hotel 5 estrellas, wellness tandil, escapada romantica tandil',
     });
 
     // Open Graph
     this.meta.updateTag({
       property: 'og:title',
-      content: 'Hermitage Boutique Hotel Tandil | Hotel de Lujo en las Sierras',
+      content: 'Hermitage Hotel Tandil | Hotel de Lujo en las Sierras',
     });
     this.meta.updateTag({
       property: 'og:description',
       content:
-        'Descubre el refugio perfecto en las sierras de Tandil. Hotel boutique de lujo con spa, habitaciones premium y experiencias wellness únicas.',
+        'Descubre el refugio perfecto en las sierras de Tandil. Hotel de lujo con spa, habitaciones premium y experiencias wellness únicas.',
     });
     this.meta.updateTag({ property: 'og:type', content: 'website' });
 
     // Twitter Card
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.meta.updateTag({ name: 'twitter:title', content: 'Hermitage Boutique Hotel Tandil' });
+    this.meta.updateTag({ name: 'twitter:title', content: 'Hermitage Hotel Tandil' });
   }
 
   /**
