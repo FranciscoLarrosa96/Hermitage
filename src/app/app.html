@@ -18,7 +18,7 @@
   [class]="
     'fixed top-0 left-0 right-0 z-50 px-6 lg:px-40 py-4 transition-all duration-300 ' +
     (isScrolled()
-      ? 'bg-[#1a1a2e] shadow-lg border-b border-white/10'
+      ? 'bg-primary shadow-lg border-b border-white/10'
       : 'bg-transparent backdrop-blur-md border-b border-transparent')
   "
 >
@@ -36,27 +36,53 @@
         </div>
       </div>
     </div>
-    <nav class="hidden md:flex items-center gap-10 text-white">
+    <nav class="hidden md:flex items-center gap-8 text-white">
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
         href="#inicio"
-        >Inicio</a
       >
+        <svg class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Inicio</span>
+      </a>
+      
+      <div class="w-px h-6 bg-white/20"></div>
+      
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
         href="#rooms"
-        >Habitaciones</a
       >
+        <svg class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Habitaciones</span>
+      </a>
+      
+      <div class="w-px h-6 bg-white/20"></div>
+      
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
         href="#gallery"
-        >Galería</a
       >
+        <svg class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Galería</span>
+      </a>
+      
+      <div class="w-px h-6 bg-white/20"></div>
+      
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
         href="#contact"
-        >Contacto</a
       >
+        <svg class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Contacto</span>
+      </a>
     </nav>
     <a
       class="bg-primary text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-hover transition-all shadow-md"
