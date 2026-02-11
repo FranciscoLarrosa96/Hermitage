@@ -1,11 +1,12 @@
 import {
   Component,
   OnInit,
-  AfterViewInit,
   signal,
   inject,
   computed,
   ElementRef,
+  DestroyRef,
+  afterNextRender,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
@@ -30,7 +31,7 @@ type RoomCategory = {
     '(window:keydown)': 'onKeyDown($event)',
   },
 })
-export class App implements OnInit, AfterViewInit {
+export class App implements OnInit {
   private readonly meta = inject(Meta);
   private readonly titleService = inject(Title);
   private readonly elementRef = inject(ElementRef);
@@ -41,8 +42,9 @@ export class App implements OnInit, AfterViewInit {
   protected readonly lightboxOpen = signal(false);
   protected readonly lightboxImages = signal<string[]>([]);
   protected readonly lightboxIndex = signal(0);
-  private heroObserver?: IntersectionObserver;
-
+  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly destroyRef = inject(DestroyRef);
+  readonly heroRevealed = signal(false);
   protected readonly selectedImage = computed(() => {
     const imgs = this.lightboxImages();
     const idx = this.lightboxIndex();
@@ -181,36 +183,34 @@ export class App implements OnInit, AfterViewInit {
     },
   ];
 
+  constructor() {
+    afterNextRender(() => {
+      const root = this.el.nativeElement;
+
+      // ✅ sin <HTMLElement> genérico (evita ts(2347))
+      const heroes = root.querySelectorAll('.js-hero-wipe') as NodeListOf<HTMLElement>;
+      if (!heroes.length) return;
+
+      const obs = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            (entry.target as HTMLElement).classList.add('is-revealed');
+            this.heroRevealed.set(true);
+            obs.unobserve(entry.target);
+          }
+        },
+        { threshold: 0.25, rootMargin: '0px 0px -10% 0px' },
+      );
+
+      heroes.forEach((h) => obs.observe(h));
+      this.destroyRef.onDestroy(() => obs.disconnect());
+    });
+  }
+
   ngOnInit() {
     this.initSEO();
     this.initAOS();
-  }
-
-  ngAfterViewInit() {
-    // SSR safety
-    if (typeof window === 'undefined') return;
-
-    const heroes: NodeListOf<HTMLElement> =
-      this.elementRef.nativeElement.querySelectorAll('.js-hero-wipe');
-
-    if (!heroes.length) return;
-
-    this.heroObserver = new IntersectionObserver(
-      (entries, obs) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          (entry.target as HTMLElement).classList.add('is-revealed');
-          obs.unobserve(entry.target);
-        }
-      },
-      {
-        root: null,
-        threshold: 0.25,
-        rootMargin: '0px 0px -10% 0px',
-      },
-    );
-
-    heroes.forEach((el) => this.heroObserver!.observe(el));
   }
 
   /**
