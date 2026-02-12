@@ -426,7 +426,7 @@
 
 /* Opcional: que la imagen arranque apenas "apagada" y se asiente */
 .hero-wipe img {
-  transform: scale(1.02);
+  transform: scale(1.95);
 }
 
 /* Overlays: gigantes + skew (igual al ejemplo que inspeccionaste) */
@@ -503,7 +503,7 @@
 }
 
 .hero-wipe.is-revealed img {
-  animation: heroImageSettle 1800ms ease forwards;
+  animation: heroImageSettle 2800ms ease forwards;
 }
 
 @keyframes heroImageSettle {

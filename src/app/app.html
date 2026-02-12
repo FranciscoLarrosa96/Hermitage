@@ -190,14 +190,14 @@
               <!-- Hero Image (fija) -->
               <button
                 type="button"
-                class="w-full overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm group hero-wipe js-hero-wipe"
+                class="transition duration-500 group-hover:scale-[1.02] w-full overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm group hero-wipe js-hero-wipe"
                 (click)="openLightbox(section.hero, getAllRoomImages(section), 'universalLightbox')"
                 aria-label="Ver imagen principal"
               >
                 <img
                   [src]="section.hero"
                   [alt]="section.title + ' - imagen principal'"
-                  class="w-full aspect-[16/10] object-cover transition duration-500 group-hover:scale-[1.02]"
+                  class="w-full aspect-[16/10] object-cover"
                   loading="lazy"
                   decoding="async"
                 />
