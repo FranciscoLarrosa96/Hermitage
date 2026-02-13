@@ -221,3 +221,10 @@ html {
     opacity: 1;
   }
 }
+
+::selection {
+  background-color: var(--color-primary);
+  /* Color de fondo de la selección */
+  color: white;
+  /* Color del texto en la selección */
+}
