@@ -851,13 +851,32 @@
             class="text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary/60"
             >Fecha estimada</label
           >
-          <input
-            id="contact-date"
-            name="date"
-            class="bg-transparent border-b border-border focus:border-primary focus:ring-0 py-2 outline-none transition-colors"
-            type="date"
-            aria-label="Fecha estimada de llegada"
-          />
+          <div class="relative">
+            <input
+              id="contact-date"
+              name="date"
+              class="bg-transparent border-b border-border focus:border-primary focus:ring-0 py-2 outline-none transition-colors w-full pr-8 cursor-pointer"
+              type="text"
+              placeholder="Seleccione una fecha"
+              aria-label="Fecha estimada de llegada"
+              readonly
+            />
+            <svg
+              class="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 text-primary pointer-events-none"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
         </div>
         <div class="flex flex-col gap-2">
           <label

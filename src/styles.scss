@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'aos/dist/aos.css';
+@import 'air-datepicker/air-datepicker.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -227,4 +228,337 @@ html {
   /* Color de fondo de la selección */
   color: white;
   /* Color del texto en la selección */
+}
+
+/* ============ AIR DATEPICKER CUSTOM STYLES ============ */
+
+/* Contenedor principal del calendario */
+.air-datepicker {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  font-family: 'Signika', sans-serif !important;
+  padding: 0 !important;
+  width: 320px !important;
+}
+
+.air-datepicker.-active- {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Header del mes y navegación */
+.air-datepicker--navigation {
+  background: var(--color-primary) !important;
+  padding: 1.25rem 1rem !important;
+  border-radius: 1.25rem 1.25rem 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: auto !important;
+}
+
+.air-datepicker-nav {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Título del mes */
+.air-datepicker-nav--title {
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  padding: 0.5rem 1rem !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 0.5rem !important;
+  border: none !important;
+  transition: background 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.air-datepicker-nav--title:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.air-datepicker-nav--title i {
+  color: white !important;
+  margin-left: 0.25rem !important;
+}
+
+/* Botones de navegación (flechas) */
+.air-datepicker-nav--action {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  color: white !important;
+  position: relative !important;
+}
+
+.air-datepicker-nav--action:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05) !important;
+}
+
+.air-datepicker-nav--action svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: white !important;
+}
+
+.air-datepicker-nav--action path {
+  stroke: white !important;
+  stroke-width: 2.5px !important;
+  fill: none !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* Flechas custom con mejor visibilidad */
+.air-datepicker-nav--action::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-top: 2.5px solid white;
+  border-right: 2.5px solid white;
+  transform-origin: center;
+}
+
+.air-datepicker-nav--action[data-action="prev"]::before {
+  transform: rotate(-135deg);
+  margin-left: 2px;
+}
+
+.air-datepicker-nav--action[data-action="next"]::before {
+  transform: rotate(45deg);
+  margin-right: 2px;
+}
+
+/* Ocultar SVG nativo si existe */
+.air-datepicker-nav--action svg {
+  display: none !important;
+}
+
+/* Cuerpo del calendario */
+.air-datepicker--content {
+  padding: 1rem !important;
+  background: var(--color-surface) !important;
+}
+
+/* Días de la semana */
+.air-datepicker-body--day-names {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 4px !important;
+  margin-bottom: 0.5rem !important;
+  padding: 0.75rem 0 !important;
+  background: var(--color-bg) !important;
+  border-radius: 0.5rem !important;
+  margin: 0 -0.5rem 0.75rem !important;
+}
+
+.air-datepicker-body--day-name {
+  color: var(--color-primary) !important;
+  font-weight: 700 !important;
+  font-size: 0.7rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  text-align: center !important;
+  padding: 0 !important;
+}
+
+/* Grid de días */
+.air-datepicker-body--cells {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 4px !important;
+}
+
+/* Celda de día */
+.air-datepicker-cell {
+  border-radius: 50% !important;
+  border: none !important;
+  height: 40px !important;
+  width: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 500 !important;
+  color: var(--color-text-primary) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  background: transparent !important;
+}
+
+/* Hover en días */
+.air-datepicker-cell:hover:not(.-disabled-):not(.-selected-) {
+  background: var(--color-primary) !important;
+  color: white !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 4px 12px rgba(141, 34, 40, 0.25) !important;
+}
+
+/* Día actual (hoy) */
+.air-datepicker-cell.-current- {
+  border: 2px solid var(--color-primary) !important;
+  font-weight: 700 !important;
+  color: var(--color-primary) !important;
+  background: transparent !important;
+}
+
+.air-datepicker-cell.-current-:hover {
+  background: var(--color-primary) !important;
+  color: white !important;
+}
+
+/* Día seleccionado */
+.air-datepicker-cell.-selected- {
+  background: var(--color-primary) !important;
+  color: white !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(141, 34, 40, 0.3) !important;
+  transform: scale(1.05) !important;
+}
+
+.air-datepicker-cell.-selected-:hover {
+  background: var(--color-hover) !important;
+}
+
+/* Días de otros meses */
+.air-datepicker-cell.-other-month- {
+  color: var(--color-text-secondary) !important;
+  opacity: 0.3 !important;
+}
+
+.air-datepicker-cell.-other-month-:hover {
+  opacity: 0.5 !important;
+}
+
+/* Días deshabilitados */
+.air-datepicker-cell.-disabled- {
+  color: var(--color-text-secondary) !important;
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+}
+
+.air-datepicker-cell.-disabled-:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Rango de fechas (por si se usa en el futuro) */
+.air-datepicker-cell.-in-range- {
+  background: rgba(141, 34, 40, 0.1) !important;
+  border-radius: 0 !important;
+}
+
+.air-datepicker-cell.-range-from-,
+.air-datepicker-cell.-range-to- {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border-radius: 50% !important;
+}
+
+/* Panel de meses/años (si se activa) */
+.air-datepicker--pointer {
+  display: none !important;
+}
+
+.air-datepicker-body--cells.-months- .air-datepicker-cell,
+.air-datepicker-body--cells.-years- .air-datepicker-cell {
+  height: 50px !important;
+  width: auto !important;
+  border-radius: 0.75rem !important;
+  font-size: 0.95rem !important;
+}
+
+/* Botones de acción (si se usan) */
+.air-datepicker--buttons {
+  border-top: 1px solid var(--color-border) !important;
+  padding: 1rem !important;
+  display: flex !important;
+  gap: 0.5rem !important;
+  background: var(--color-bg) !important;
+  border-radius: 0 0 1.25rem 1.25rem !important;
+}
+
+.air-datepicker-button {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex: 1 !important;
+}
+
+.air-datepicker-button:hover {
+  background: var(--color-hover) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(141, 34, 40, 0.25) !important;
+}
+
+/* Animación de entrada */
+@keyframes airdatepickerShow {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.air-datepicker {
+  animation: airdatepickerShow 0.2s ease !important;
+}
+
+/* Dark mode support */
+.dark .air-datepicker {
+  background: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+}
+
+.dark .air-datepicker--content {
+  background: var(--color-surface) !important;
+}
+
+.dark .air-datepicker-cell {
+  color: var(--color-text-primary) !important;
+}
+
+.dark .air-datepicker-body--day-names {
+  background: var(--color-bg) !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .air-datepicker {
+    width: 90vw !important;
+    max-width: 340px !important;
+  }
+
+  .air-datepicker-cell {
+    height: 36px !important;
+    width: 36px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .air-datepicker-nav--title {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
 }

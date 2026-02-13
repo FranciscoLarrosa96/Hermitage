@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
+import AirDatepicker from 'air-datepicker';
+import localeEs from 'air-datepicker/locale/es';
 import { SplashOverlayComponent } from '../core/splash/splash-overlay.component';
 
 type RoomCategory = {
@@ -206,6 +208,31 @@ export class App implements OnInit {
 
       heroes.forEach((h) => obs.observe(h));
       this.destroyRef.onDestroy(() => obs.disconnect());
+
+      // Inicializar Flatpickr para el date picker
+      this.initDatePicker();
+    });
+  }
+
+  /**
+   * Inicializa el date picker con Air Datepicker y configuración premium
+   */
+  private initDatePicker(): void {
+    const dateInput = document.getElementById('contact-date') as HTMLInputElement;
+    if (!dateInput) return;
+
+    new AirDatepicker(dateInput, {
+      locale: localeEs,
+      dateFormat: 'dd/MM/yyyy',
+      minDate: new Date(),
+      autoClose: true,
+      position: 'bottom left',
+      isMobile: false,
+      inline: false,
+      navTitles: {
+        days: 'MMMM yyyy',
+      },
+      buttons: [],
     });
   }
 
