@@ -7,32 +7,56 @@ import { SplashService } from './splash.service';
   template: `
     @if (splash.visible()) {
       <div class="splash" [class.splash-leave]="splash.leaving()" role="status" aria-live="polite">
-        <!-- Fondo -->
+        <!-- Fondo con gradiente premium -->
         <div class="splash-backdrop"></div>
 
-        <!-- Panel -->
-        <div class="splash-card">
-          <div class="splash-logo">
-            <img
-              src="assets/logos/hotel_logo_blanco.svg"
-              alt="Hermitage Hotel"
-              class="h-16"
-              draggable="false"
-            />
-            <img
-              src="assets/stars.png"
-              alt="3 estrellas"
-              class="h-6 mt-2 opacity-90"
-              draggable="false"
-            />
-          </div>
-
-          <p class="splash-tagline">DONDE LA CALMA ENCUENTRA SU HOGAR</p>
-
-          <div class="splash-line" aria-hidden="true"></div>
+        <!-- Partículas decorativas -->
+        <div class="splash-particles" aria-hidden="true">
+          <div class="particle particle-1"></div>
+          <div class="particle particle-2"></div>
+          <div class="particle particle-3"></div>
+          <div class="particle particle-4"></div>
+          <div class="particle particle-5"></div>
         </div>
 
-        <!-- Cortina diagonal de salida -->
+        <!-- Panel principal -->
+        <div class="splash-card">
+          <!-- Logo con animación de entrada -->
+          <div class="splash-logo">
+            <div class="logo-container">
+              <img
+                src="assets/logos/hotel_logo_blanco.svg"
+                alt="Hermitage Hotel"
+                class="main-logo"
+                draggable="false"
+              />
+              <div class="logo-glow"></div>
+            </div>
+
+            <!-- Estrellas con animación escalonada -->
+            <div class="stars-container">
+              <img src="assets/stars.png" alt="3 estrellas" class="stars" draggable="false" />
+            </div>
+          </div>
+
+          <!-- Línea decorativa elegante -->
+          <div class="splash-divider" aria-hidden="true">
+            <div class="divider-elegant"></div>
+          </div>
+
+          <!-- Tagline premium -->
+          <div class="splash-tagline">
+            <span class="tagline-main">DONDE LA CALMA</span>
+            <span class="tagline-sub">ENCUENTRA SU HOGAR</span>
+          </div>
+
+          <!-- Indicador de carga elegante -->
+          <div class="splash-progress">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+
+        <!-- Efecto de salida mejorado -->
         <div class="splash-exit-wipe" aria-hidden="true"></div>
       </div>
     }
