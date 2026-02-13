@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
+import { SplashOverlayComponent } from '../core/splash/splash-overlay.component';
 
 type RoomCategory = {
   id: string;
@@ -23,7 +24,7 @@ type RoomCategory = {
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [SplashOverlayComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   host: {
