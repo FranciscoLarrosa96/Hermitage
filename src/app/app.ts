@@ -14,14 +14,15 @@ import AirDatepicker from 'air-datepicker';
 import localeEs from 'air-datepicker/locale/es';
 import { SplashOverlayComponent } from '../core/splash/splash-overlay.component';
 
-type RoomCategory = {
+type ResponsiveImages = { desktop: string[]; mobile: string[] };
+type GalleryImages = string[] | ResponsiveImages;
+
+type GallerySection = {
   id: string;
-  name: string;
-  tagline: string;
-  hero: string;
-  thumbs: string[];
-  gallery: string[];
-  features: { icon: string; label: string }[];
+  icon: string;
+  title: string;
+  description: string;
+  images: GalleryImages;
 };
 
 @Component({
@@ -48,6 +49,8 @@ export class App implements OnInit {
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
   readonly heroRevealed = signal(false);
+  // Detector de viewport Mobile/Desktop
+  protected readonly isMobile = signal(false);
   protected readonly selectedImage = computed(() => {
     const imgs = this.lightboxImages();
     const idx = this.lightboxIndex();
@@ -68,7 +71,7 @@ export class App implements OnInit {
     'review12.png',
   ];
 
-  gallery = [
+  gallery: GallerySection[] = [
     {
       id: 'hall',
       icon: 'assets/icons/hall.svg',
@@ -122,6 +125,30 @@ export class App implements OnInit {
         'assets/gallery/gym/g4.avif',
         'assets/gallery/gym/g5.avif',
       ],
+    },
+    {
+      id: 'breakfast',
+      icon: 'assets/icons/brakfast.svg',
+      title: 'Desayuno',
+      description: 'Comenzá tu día...',
+      images: {
+        desktop: [
+          'assets/gallery/desayuno/des-1-d.avif',
+          'assets/gallery/desayuno/des-2-d.avif',
+          'assets/gallery/desayuno/des-3-d.avif',
+          'assets/gallery/desayuno/des-6-d.avif',
+          'assets/gallery/desayuno/des-7-d.avif',
+          'assets/gallery/desayuno/des-8-d.avif',
+          'assets/gallery/desayuno/des-9-d.avif',
+        ],
+        mobile: [
+          'assets/gallery/desayuno/des-1-m.avif',
+          'assets/gallery/desayuno/des-10-m.avif',
+          'assets/gallery/desayuno/des-11-m.avif',
+          'assets/gallery/desayuno/des-4-dm.avif',
+          'assets/gallery/desayuno/des-5-dm.avif',
+        ],
+      },
     },
   ];
 
@@ -211,6 +238,12 @@ export class App implements OnInit {
 
       // Inicializar Flatpickr para el date picker
       this.initDatePicker();
+
+      // Detectar viewport mobile/desktop
+      this.checkViewport();
+      const resizeHandler = () => this.checkViewport();
+      window.addEventListener('resize', resizeHandler);
+      this.destroyRef.onDestroy(() => window.removeEventListener('resize', resizeHandler));
     });
   }
 
@@ -261,12 +294,30 @@ export class App implements OnInit {
     const scrollPosition = window.scrollY;
     this.isScrolled.set(scrollPosition > 700);
   }
+
+  /**
+   * Detecta si el viewport es mobile o desktop
+   */
+  private checkViewport(): void {
+    this.isMobile.set(window.innerWidth < 768);
+  }
+
+  // Helper: devuelve la primera imagen (desktop)
+  protected getFirstImage(images: (string | { desktop: string; mobile: string })[]): string {
+    const first = images[0];
+    return typeof first === 'string' ? first : first.desktop;
+  }
+
   // ---------------- LIGHTBOX (universal) ----------------
-  protected openLightbox(imageSrc: string, images: string[], focusId?: string): void {
+  protected openLightbox(
+    imageSrc: string,
+    images: (string | { desktop: string; mobile: string })[],
+    focusId?: string,
+  ): void {
     if (!images?.length) return;
 
     const idx = images.indexOf(imageSrc);
-    this.lightboxImages.set(images);
+    this.lightboxImages.set(images.map((img) => (typeof img === 'string' ? img : img.desktop)));
     this.lightboxIndex.set(idx >= 0 ? idx : 0);
 
     this.lightboxOpen.set(true);
@@ -277,6 +328,30 @@ export class App implements OnInit {
       if (!focusId) return;
       const el = document.getElementById(focusId);
       el?.focus();
+    });
+  }
+
+  /**
+   *  Abre el lightbox para una galería específica, adaptando las imágenes según el viewport (mobile/desktop) y posicionando el índice en la imagen seleccionada. También bloquea el scroll del fondo y opcionalmente enfoca un elemento dentro del lightbox para mejorar la accesibilidad.
+   * @param images
+   * @param startIndex
+   * @param focusId
+   * @returns
+   */
+  protected openGalleryLightbox(images: GalleryImages, startIndex = 0, focusId?: string): void {
+    const list = this.getImagesByViewport(images);
+    if (!list.length) return;
+
+    const safeIndex = Math.min(Math.max(startIndex, 0), list.length - 1);
+
+    this.lightboxImages.set(list);
+    this.lightboxIndex.set(safeIndex);
+    this.lightboxOpen.set(true);
+    document.documentElement.classList.add('overflow-hidden');
+
+    queueMicrotask(() => {
+      if (!focusId) return;
+      document.getElementById(focusId)?.focus();
     });
   }
 
@@ -395,5 +470,21 @@ export class App implements OnInit {
       easing: 'ease-in-out',
       once: false,
     });
+  }
+
+  /**
+   *  Dado un conjunto de imágenes que pueden ser un array simple o un objeto con versiones para desktop y mobile, esta función devuelve el array de imágenes correspondiente al viewport actual. Si el formato es responsive, selecciona la lista adecuada según si el usuario está en un dispositivo móvil o de escritorio. Además, incluye un fallback para asegurar que siempre se devuelva una lista de imágenes válida, incluso si alguna de las versiones queda vacía.
+   * @param images
+   * @returns
+   */
+  protected getImagesByViewport(images: GalleryImages): string[] {
+    // Caso normal (hall, terraza, gym): ya es string[]
+    if (Array.isArray(images)) return images;
+
+    // Caso responsive (desayuno)
+    const list = this.isMobile() ? images.mobile : images.desktop;
+
+    // fallback por si algún día te queda vacío
+    return list?.length ? list : images.desktop;
   }
 }

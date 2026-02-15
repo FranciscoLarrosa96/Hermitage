@@ -318,7 +318,13 @@
                   <button
                     type="button"
                     class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-3 text-text font-extrabold hover:bg-black/[0.02] transition"
-                    (click)="openLightbox(section.images[0], section.images, 'universalLightbox')"
+                    (click)="
+                      openLightbox(
+                        getFirstImage(section.images),
+                        section.images,
+                        'universalLightbox'
+                      )
+                    "
                   >
                     Ver galería
                   </button>
@@ -397,10 +403,10 @@
             <button
               type="button"
               class="gallery-card aspect-[4/3] w-full text-left relative overflow-hidden"
-              (click)="openLightbox(section.images[0], section.images, 'universalLightbox')"
+              (click)="openGalleryLightbox(section.images, 0)"
             >
               <img
-                [src]="section.images[0]"
+                [src]="getImagesByViewport(section.images)[0]"
                 [alt]="section.title + ' - vista principal'"
                 class="gallery-image"
                 loading="lazy"
@@ -413,7 +419,7 @@
               >
                 <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <span class="text-white text-sm font-medium">
-                    {{ section.images.length }} fotos
+                    {{ getImagesByViewport(section.images).length }} fotos
                   </span>
                   <svg
                     class="w-6 h-6 text-white"
@@ -472,7 +478,7 @@
             <button
               type="button"
               class="group inline-flex items-center gap-3 px-6 py-3.5 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white rounded-full font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-              (click)="openLightbox(section.images[0], section.images, 'universalLightbox')"
+              (click)="openGalleryLightbox(section.images, 0, 'universalLightbox')"
             >
               <svg
                 class="w-5 h-5 transition-transform group-hover:scale-110"
@@ -488,7 +494,7 @@
                 />
               </svg>
               <span>Ver galería completa</span>
-              <span class="text-white/80 text-xs">({{ section.images.length }})</span>
+              <span class="text-white/80 text-xs">({{  getImagesByViewport(section.images).length }})</span>
             </button>
           </div>
         </div>
