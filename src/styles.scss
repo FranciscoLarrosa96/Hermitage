@@ -811,7 +811,10 @@ html {
 @media (max-width: 640px) {
   .air-datepicker {
     width: 90vw !important;
-    max-width: 340px !important;
+    max-width: 320px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000 !important;
   }
 
   .air-datepicker-cell {
@@ -823,5 +826,31 @@ html {
   .air-datepicker-nav--title {
     font-size: 0.9rem !important;
     padding: 0.4rem 0.8rem !important;
+  }
+}
+
+/* Para pantallas muy pequeñas (menores a 418px) */
+@media (max-width: 418px) {
+  .air-datepicker {
+    width: calc(100vw - 2rem) !important;
+    max-width: 280px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000 !important;
+  }
+
+  .air-datepicker-body--day-name {
+    font-size: 0.65rem !important;
+  }
+
+  .air-datepicker-cell {
+    height: 32px !important;
+    width: 32px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .air-datepicker-nav--title {
+    font-size: 0.8rem !important;
+    padding: 0.3rem 0.6rem !important;
   }
 }

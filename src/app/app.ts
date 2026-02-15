@@ -226,7 +226,6 @@ export class App implements OnInit {
       dateFormat: 'dd/MM/yyyy',
       minDate: new Date(),
       autoClose: true,
-      position: 'bottom left',
       isMobile: false,
       inline: false,
       navTitles: {
