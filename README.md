@@ -1,14 +1,14 @@
 <div align="center">
-  <h1>🏔️ Hermitage Boutique Hotel</h1>
+  <h1>🏔️ Hermitage  Hotel</h1>
   <p><strong>Landing Page Institucional</strong></p>
-  <p>Una experiencia web premium para un hotel boutique en las sierras de Tandil, Argentina</p>
+  <p>Una experiencia web premium para un hotel en las sierras de Tandil, Argentina</p>
 </div>
 
 ---
 
 ## 📋 Descripción del Proyecto
 
-**Hermitage** es una landing page empresarial desarrollada para un hotel boutique de alta gama ubicado en Tandil, Argentina. El proyecto combina diseño moderno, accesibilidad y rendimiento óptimo para ofrecer una experiencia de navegación excepcional que refleja la calidad y elegancia del establecimiento.
+**Hermitage** es una landing page empresarial desarrollada para un hotel de alta gama ubicado en Tandil, Argentina. El proyecto combina diseño moderno, accesibilidad y rendimiento óptimo para ofrecer una experiencia de navegación excepcional que refleja la calidad y elegancia del establecimiento.
 
 ### 🎯 Características Principales
 
@@ -202,7 +202,7 @@ Los archivos compilados estarán en `dist/hermitage/browser/`
 
 ## 📞 Contacto del Hotel
 
-**Hermitage Boutique Hotel**
+**Hermitage Hotel**
 
 - 📍 Tandil, Buenos Aires, Argentina
 - 📧 hola@hermitagetandil.com
@@ -213,17 +213,17 @@ Los archivos compilados estarán en `dist/hermitage/browser/`
 
 ## 📄 Licencia
 
-Este proyecto fue desarrollado para uso comercial exclusivo de Hermitage Boutique Hotel.
+Este proyecto fue desarrollado para uso comercial exclusivo de Hermitage Hotel.
 
 ---
 
 ## 🙏 Agradecimientos
 
-Desarrollado con ❤️ para brindar la mejor experiencia digital que refleje la calidad y calidez del Hermitage Boutique Hotel.
+Desarrollado con ❤️ para brindar la mejor experiencia digital que refleje la calidad y calidez del Hermitage Hotel.
 
 ---
 
 <div align="center">
-  <p><strong>Hermitage Boutique Hotel © 2024-2026</strong></p>
+  <p><strong>Hermitage Hotel © 2024-2026</strong></p>
   <p>Donde la calma encuentra su hogar</p>
 </div>

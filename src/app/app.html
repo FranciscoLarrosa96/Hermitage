@@ -1,8 +1,10 @@
+<!-- SplashScreen -->
+<app-splash-overlay />
 <!-- WhatsApp Float Button -->
 <a
   aria-label="Contactar por WhatsApp"
   class="fixed bottom-8 right-8 z-[60] flex items-center justify-center w-14 h-14 bg-primary hover:bg-hover text-white rounded-full shadow-lg transition-all hover:scale-110 active:scale-95"
-  href="https://wa.me/5492494556677"
+  href="https://wa.me/542494286288?text=Hola%2C%20estoy%20interesado%20en%20una%20estad%C3%ADa%20en%20el%20Hotel.%20%C2%BFPodr%C3%ADan%20enviarme%20informaci%C3%B3n%20sobre%20disponibilidad%20y%20precios%3F"
   rel="noopener noreferrer"
   target="_blank"
 >
@@ -15,41 +17,98 @@
 
 <!-- Header -->
 <header
-  class="fixed top-0 left-0 right-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border px-6 lg:px-40 py-4"
+  [class]="
+    'fixed top-0 left-0 right-0 z-50 px-6 lg:px-40 py-4 transition-all duration-300 ' +
+    (isScrolled()
+      ? 'bg-primary shadow-lg border-b border-white/10'
+      : 'bg-transparent backdrop-blur-md border-b border-transparent')
+  "
 >
   <div class="max-w-[1200px] mx-auto flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="text-primary">
-        <span class="material-symbols-outlined text-3xl">landscape</span>
-      </div>
       <div class="flex flex-col">
-        <h2 class="text-text-primary text-xl font-bold tracking-tight">Hermitage</h2>
-        <div class="flex items-center">
-          <img src="assets/stars.png" alt="3 estrellas" class="h-3" />
+        <div class="flex flex-col items-center">
+          <img
+            src="assets/logos/hotel_logo_blanco.svg"
+            alt="Hermitage Hotel Logo"
+            class="h-8"
+            fetchpriority="high"
+          />
+          <img src="assets/stars.png" alt="3 estrellas" class="h-3" fetchpriority="high" />
         </div>
       </div>
     </div>
-    <nav class="hidden md:flex items-center gap-10 text-white">
+    <nav class="hidden md:flex items-center gap-8 text-white">
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
-        href="#essence"
-        >Esencia</a
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
+        href="#inicio"
       >
+        <svg
+          class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+          />
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Inicio</span>
+      </a>
+
+      <div class="w-px h-6 bg-white/20"></div>
+
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
         href="#rooms"
-        >Habitaciones</a
       >
+        <svg
+          class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+          />
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Habitaciones</span>
+      </a>
+
+      <div class="w-px h-6 bg-white/20"></div>
+
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
-        href="#wellness"
-        >Wellness</a
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
+        href="#gallery"
       >
+        <svg
+          class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Galería</span>
+      </a>
+
+      <div class="w-px h-6 bg-white/20"></div>
+
       <a
-        class="text-xs uppercase tracking-widest font-bold hover:text-primary transition-colors"
+        class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/15 hover:border-white/20 transition-all duration-300"
         href="#contact"
-        >Contacto</a
       >
+        <svg
+          class="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+        </svg>
+        <span class="text-xs uppercase tracking-widest font-bold">Contacto</span>
+      </a>
     </nav>
     <a
       class="bg-primary text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-hover transition-all shadow-md"
@@ -62,18 +121,26 @@
 
 <!-- Hero Section -->
 <section
-  class="relative h-[90vh] md:h-screen flex items-center justify-center pt-16 bg-cover bg-center"
+  class="relative h-[100dvh] md:h-screen flex items-center justify-center pt-16 bg-cover bg-center"
   aria-label="Sección principal del hotel"
   style="background-image: url('assets/hero-img.avif')"
+  id="inicio"
 >
   <!-- Overlay with backdrop blur -->
   <div class="absolute inset-0 bg-black/30 backdrop-blur-sm z-0"></div>
   <div class="relative z-10 text-center px-6 max-w-4xl">
-    <h1 class="text-white text-7xl md:text-9xl font-light serif-title mb-4" data-aos="fade-up">
-      Hermitage
-    </h1>
-    <div class="flex items-center justify-center mb-4" data-aos="fade-up" data-aos-delay="150">
-      <img src="assets/stars.png" alt="3 estrellas" class="h-12" />
+    <div
+      class="flex flex-col items-center justify-center mb-4"
+      data-aos="fade-up"
+      data-aos-delay="150"
+    >
+      <img
+        src="assets/logos/hotel_logo_blanco.svg"
+        alt="Hermitage Hotel Logo"
+        class="h-52"
+        fetchpriority="high"
+      />
+      <img src="assets/stars.png" alt="3 estrellas" class="h-12" fetchpriority="high" />
     </div>
     <h2
       class="text-white text-lg md:text-xl font-light tracking-[0.3em] uppercase mb-12"
@@ -82,84 +149,215 @@
     >
       Donde la calma encuentra su hogar
     </h2>
-    <div
-      class="flex flex-col md:flex-row gap-5 justify-center"
-      data-aos="fade-up"
-      data-aos-delay="400"
-    >
-      <a
-        class="bg-primary text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform hover:bg-hover shadow-xl"
-        href="#contact"
-      >
-        Consultar disponibilidad
-      </a>
-      <a
-        class="bg-white/10 backdrop-blur-md text-white border border-white/40 px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white/20 transition-all"
-        href="#essence"
-      >
-        Explorar el Refugio
-      </a>
-    </div>
   </div>
 </section>
 
-<section class="py-14 sm:py-16 lg:py-20 bg-bg overflow-hidden" aria-label="Reseñas de huéspedes">
-  <!-- Header -->
-  <div class="mb-8 sm:mb-10 lg:mb-12 text-center" data-aos="fade-down">
-    <div class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm">
-      <svg class="h-4 w-4 sm:h-5 sm:w-5 text-primary" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4L12 2z" fill="currentColor"/>
-      </svg>
-      <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
-        Experiencias compartidas
+<div class="w-full flex justify-center items-center gap-4 my-16">
+  <div class="w-16 h-[2px] bg-border"></div>
+  <i class="fas fa-bed text-primary text-xl"></i>
+  <div class="w-16 h-[2px] bg-border"></div>
+</div>
+
+<!-- Rooms -->
+<section id="rooms" aria-label="Habitaciones" class="py-14 sm:py-16 lg:py-20 bg-bg">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-10 sm:mb-12" data-aos="fade-down">
+      <div
+        class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
+      >
+        <img src="assets/icons/bed.svg" alt="Icono de cama" loading="lazy" decoding="async" />
+        <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
+          Habitaciones
+        </p>
+      </div>
+
+      <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
+        Elegí tu experiencia
+      </h2>
+
+      <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
+        Standard, Superior o Suite: misma base de servicios, distinta sensación de espacio y
+        confort.
       </p>
     </div>
 
-    <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
-      Lo que dicen nuestros huéspedes
-    </h2>
-    <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
-      Reseñas reales para que reserves con confianza.
-    </p>
-  </div>
+    <!-- Blocks -->
+    <div class="space-y-16">
+      @for (section of roomsGallery; track section.id; let last = $last) {
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <!-- LEFT: Media (hero + carousel) -->
+          <div class="lg:col-span-7 lg:sticky lg:top-24">
+            <div class="relative space-y-4">
+              <!-- Hero Image (fija) -->
+              <button
+                type="button"
+                class="transition duration-500 group-hover:scale-[1.02] w-full overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm group hero-wipe js-hero-wipe"
+                (click)="openLightbox(section.hero, getAllRoomImages(section), 'universalLightbox')"
+                aria-label="Ver imagen principal"
+              >
+                <img
+                  [src]="section.hero"
+                  [alt]="section.title + ' - imagen principal'"
+                  class="w-full aspect-[16/10] object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
 
-  <div class="relative">
-    <!-- fades -->
-    <div class="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-r from-bg to-transparent z-10"></div>
-    <div class="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 lg:w-24 bg-gradient-to-l from-bg to-transparent z-10"></div>
+              <!-- Carousel de imágenes secundarias (responsive) -->
+              @if (section.images.length > 0) {
+                <div
+                  class="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                  aria-label="Más fotos de la habitación"
+                >
+                  @for (img of section.images; track img; let i = $index) {
+                    <button
+                      type="button"
+                      class="snap-center shrink-0 w-24 h-20 sm:w-20 sm:h-16 overflow-hidden rounded-xl border border-black/5 bg-white shadow-sm group"
+                      (click)="openLightbox(img, getAllRoomImages(section), 'universalLightbox')"
+                      aria-label="Ver foto {{ i + 2 }}"
+                    >
+                      <img
+                        [src]="img"
+                        [alt]="section.title + ' - foto ' + (i + 2)"
+                        class="w-full h-full object-cover transition duration-300 group-hover:scale-110"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          </div>
 
-    <div class="space-y-6 sm:space-y-8">
-      <!-- Row 1 (left) -->
-      <div class="marquee marquee-left flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
-        @for (img of reviewsMarquee; track $index) {
-          <img
-            [src]="'assets/reviews/' + img"
-            alt="Reseña de huésped"
-            loading="lazy"
-            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
-            [attr.aria-hidden]="$index >= reviews.length ? true : null"
-          />
+          <!-- RIGHT: Info + Features -->
+          <div class="lg:col-span-5">
+            <div
+              class="rounded-3xl border border-black/5 bg-white/70 backdrop-blur shadow-sm p-6 sm:p-7"
+            >
+              <div class="relative">
+                <!-- Watermark -->
+                <img
+                  [src]="section.icon"
+                  alt=""
+                  aria-hidden="true"
+                  class="absolute -top-6 -right-2 h-28 w-28 opacity-[0.06] select-none pointer-events-none"
+                  loading="lazy"
+                />
+
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-3 mb-4">
+                  <span
+                    class="h-11 w-11 rounded-2xl bg-white/70 backdrop-blur border border-black/5 shadow-sm flex items-center justify-center"
+                  >
+                    <img
+                      [src]="section.icon"
+                      [alt]="section.title + ' icon'"
+                      class="h-5 w-5 opacity-80 object-contain"
+                      [class.brightness-0]="section.icon.endsWith('.svg')"
+                      loading="lazy"
+                    />
+                  </span>
+
+                  <span class="text-xs uppercase tracking-[0.35em] text-primary font-extrabold">
+                    {{ section.title }}
+                  </span>
+                </div>
+
+                <!-- Description -->
+                <p class="text-lg text-text/80 leading-relaxed max-w-lg">
+                  {{ section.description }}
+                </p>
+
+                <!-- Features -->
+                <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg">
+                  @for (f of section.features; track f.label) {
+                    <li
+                      class="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-3"
+                    >
+                      <span
+                        class="h-10 w-10 rounded-xl bg-white/70 border border-black/5 shadow-sm flex items-center justify-center"
+                      >
+                        <img
+                          [src]="f.icon"
+                          [alt]="f.label"
+                          class="h-5 w-5 opacity-80 object-contain"
+                          [class.brightness-0]="f.icon.endsWith('.svg')"
+                          loading="lazy"
+                        />
+                      </span>
+                      <span class="text-sm font-semibold text-text/80">{{ f.label }}</span>
+                    </li>
+                  }
+                </ul>
+
+                <!-- Nota extra -->
+                @if (section.id === 'superior') {
+                  <p class="mt-4 text-sm text-text/60">
+                    Algunas habitaciones cuentan con balcón y vista a la plaza (según
+                    disponibilidad).
+                  </p>
+                }
+                @if (section.id === 'suite') {
+                  <p class="mt-4 text-sm text-text/60">
+                    Incluye frigobar y jacuzzi con hidromasaje.
+                  </p>
+                }
+
+                <!-- CTA -->
+                <div class="mt-7 flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="#contact"
+                    class="inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-3 text-white font-extrabold shadow-sm hover:opacity-95 transition"
+                  >
+                    Consultar disponibilidad
+                  </a>
+
+                  <button
+                    type="button"
+                    class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-3 text-text font-extrabold hover:bg-black/[0.02] transition"
+                    (click)="
+                      openLightbox(
+                        getFirstImage(section.images),
+                        section.images,
+                        'universalLightbox'
+                      )
+                    "
+                  >
+                    Ver galería
+                  </button>
+                </div>
+
+                <p class="mt-5 text-xs text-text/50 leading-relaxed">
+                  Todas las habitaciones incluyen desayuno, cochera, gimnasio y Wi-Fi. La pileta es
+                  natural y está disponible en temporada.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        @if (!last) {
+          <div class="my-12 sm:my-14 lg:my-16 flex items-center justify-center">
+            <div
+              class="h-px w-full max-w-5xl"
+              style="
+                background: linear-gradient(
+                  to right,
+                  transparent,
+                  rgba(141, 34, 40, 0.25),
+                  transparent
+                );
+              "
+            ></div>
+          </div>
         }
-      </div>
-
-      <!-- Row 2 (right) -->
-      <div class="marquee marquee-right flex gap-4 sm:gap-6 lg:gap-8 whitespace-nowrap min-w-max will-change-transform">
-        @for (img of reviewsMarquee; track $index) {
-          <img
-            [src]="'assets/reviews/' + img"
-            alt="Reseña de huésped"
-            loading="lazy"
-            class="marquee-item shrink-0 h-[150px] sm:h-[210px] lg:h-[250px] xl:h-[270px] w-auto rounded-2xl shadow-xl object-cover ring-1 ring-black/5"
-            [attr.aria-hidden]="$index >= reviews.length ? true : null"
-          />
-        }
-      </div>
+      }
     </div>
   </div>
 </section>
-
-
-
 
 <div class="w-full flex justify-center items-center gap-4 my-16">
   <div class="w-16 h-[2px] bg-border"></div>
@@ -167,177 +365,365 @@
   <div class="w-16 h-[2px] bg-border"></div>
 </div>
 
-<!-- Rooms Section -->
-<section class="py-28 px-6 lg:px-40 bg-bg" id="rooms">
-  <div class="max-w-[1200px] mx-auto">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4 tracking-tight" data-aos="fade-up">Habitaciones</h2>
-      <p class="text-text-secondary text-lg font-light" data-aos="fade-up" data-aos-delay="100">
-        Espacios curados para el sosiego y la introspección.
-      </p>
-    </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-      <!-- Room 1 -->
-      <div class="group" data-aos="fade-up" data-aos-delay="100">
-        <div class="relative overflow-hidden rounded-2xl h-[450px] mb-6 shadow-2xl">
-          <div
-            class="w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-            role="img"
-            aria-label="Suite de Piedra con vista panorámica a las sierras de Tandil al amanecer"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD-FXfEtgGA2gbanf4_u-nI9jIHPazQxzwCiNVCrHvA96Du5VAbhXD-rCdR3KuqOywvP-Ez4oVqGy-RLrrmZ4CSw_M5LqkpnV8MyaAF-Cl_hC3VRbUAbJPqY-7EaGYv6dQK9p_IUh8XtiHOdhqXywMti8Ibq7K_yw1HVQfrgRsbF5aWmzdHyApXUkIV0Wvrc3WGR7GYjCtCnfbKsotuSPwFtjxM8TTdG5METD36ioz04Tzkw5Npmi0vnERJNA5UcczhV7HmmKat5nzD');
-            "
-          ></div>
-          <div
-            class="absolute top-6 left-6 bg-primary/90 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]"
-          >
-            Más Solicitada
-          </div>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Amaneceres frente a la sierra</h3>
-        <p class="text-text-secondary mb-6 leading-relaxed">
-          Nuestra Suite de Piedra te permite despertar con el sol bañando los cerros a través de
-          ventanales infinitos, integrando la fuerza de la roca con el máximo confort moderno.
+<!-- Gallery Section -->
+<section class="py-14 sm:py-16 lg:py-20 bg-bg" aria-label="Galería del hotel" id="gallery">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-10 sm:mb-12" data-aos="zoom-in">
+      <div
+        class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
+      >
+        <svg
+          class="h-4 w-4 sm:h-5 sm:w-5 text-primary"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M4 11h16v9H4v-9zm2-7h12v5H6V4z" />
+        </svg>
+        <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
+          Gallery
         </p>
-        <div class="flex items-center justify-between">
-          <div
-            class="flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-primary/70"
-          >
-            <span class="flex items-center gap-2"
-              ><span class="material-symbols-outlined text-lg">square_foot</span> 55m²</span
-            >
-            <span class="flex items-center gap-2"
-              ><span class="material-symbols-outlined text-lg">visibility</span> Vista al
-              Valle</span
-            >
-          </div>
-          <a
-            class="text-primary font-bold text-sm underline underline-offset-8 hover:text-hover transition-colors"
-            href="#contact"
-            >Consultar esta habitación</a
-          >
-        </div>
       </div>
 
-      <!-- Room 2 -->
-      <div class="group" data-aos="fade-up" data-aos-delay="200">
-        <div class="relative overflow-hidden rounded-2xl h-[450px] mb-6 shadow-2xl">
-          <div
-            class="w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-            role="img"
-            aria-label="Habitación de Campo con balcón privado y vista al bosque serrano"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHM_sXuYP7hIxKZGO6MSMWnXglkrsdUQ08PgR_sprzg80etBB_QUrIranYtjUx-onF2crhU_hUOIAq8nG8UkRnf918y9t-L_J6isoCWoADl9QwPVCqdkd36qtWN6cGsqOuiA8XLQ3omfBvUqeXcVuXonHwYRHCHkbywmCfbc0_q7F9hlBnvxKnJbYmQm7_JrxYXKU77Qdk5S5FiYg07pcJjN_mMGjSOs9JH7EANSYbUsBcB196QZ84bQyp2UDGDU0g8vMk84WWH1d8');
-            "
-          ></div>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Refugio de madera y horizonte</h3>
-        <p class="text-text-secondary mb-6 leading-relaxed">
-          La Habitación de Campo ofrece la calidez del hogar serrano. Un balcón privado pensado para
-          contemplar la caída del sol con una copa de vino y el sonido del viento.
-        </p>
-        <div class="flex items-center justify-between">
-          <div
-            class="flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-primary/70"
-          >
-            <span class="flex items-center gap-2"
-              ><span class="material-symbols-outlined text-lg">square_foot</span> 42m²</span
+      <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">
+        Conocé nuestros espacios
+      </h2>
+      <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
+        Detalles pensados para que tu estadía sea cómoda desde el primer momento.
+      </p>
+    </div>
+
+    <!-- Blocks -->
+    <div class="space-y-12 sm:space-y-14 lg:space-y-16">
+      @for (section of gallery; track section.id; let last = $last) {
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+          <!-- Imagen principal -->
+          <div class="relative group" [attr.data-aos]="'zoom-in'">
+            <button
+              type="button"
+              class="gallery-card aspect-[4/3] w-full text-left relative overflow-hidden"
+              (click)="openGalleryLightbox(section.images, 0)"
             >
-            <span class="flex items-center gap-2"
-              ><span class="material-symbols-outlined text-lg">forest</span> Vista al Bosque</span
-            >
+              <img
+                [src]="getImagesByViewport(section.images)[0]"
+                [alt]="section.title + ' - vista principal'"
+                class="gallery-image"
+                loading="lazy"
+                decoding="async"
+              />
+
+              <!-- Overlay con contador de fotos -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">
+                    {{ getImagesByViewport(section.images).length }} fotos
+                  </span>
+                  <svg
+                    class="w-6 h-6 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </button>
           </div>
-          <a
-            class="text-primary font-bold text-sm underline underline-offset-8 hover:text-hover transition-colors"
-            href="#contact"
-            >Consultar esta habitación</a
-          >
+
+          <!-- Información y botón -->
+          <div class="relative" [attr.data-aos]="'zoom-in'">
+            <!-- Watermark decorativo -->
+            <img
+              [src]="section.icon"
+              alt=""
+              aria-hidden="true"
+              class="absolute -top-8 -right-4 h-32 w-32 opacity-[0.04] select-none pointer-events-none"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-3 mb-4">
+              <span
+                class="h-12 w-12 rounded-2xl bg-white/70 backdrop-blur border border-black/5 shadow-sm flex items-center justify-center"
+              >
+                <img
+                  [src]="section.icon"
+                  [alt]="section.title"
+                  class="h-6 w-6 opacity-80"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span class="text-xs uppercase tracking-[0.35em] text-primary font-extrabold">
+                {{ section.title }}
+              </span>
+            </div>
+
+            <!-- Descripción -->
+            <p class="text-lg text-text/80 leading-relaxed mb-6">
+              {{ section.description }}
+            </p>
+
+            <!-- Botón Ver Galería -->
+            <button
+              type="button"
+              class="group inline-flex items-center gap-3 px-6 py-3.5 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white rounded-full font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              (click)="openGalleryLightbox(section.images, 0, 'universalLightbox')"
+            >
+              <svg
+                class="w-5 h-5 transition-transform group-hover:scale-110"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <span>Ver galería completa</span>
+              <span class="text-white/80 text-xs">({{  getImagesByViewport(section.images).length }})</span>
+            </button>
+          </div>
         </div>
-      </div>
+
+        @if (!last) {
+          <div class="my-12 sm:my-14 lg:my-16 flex items-center justify-center">
+            <div
+              class="h-px w-full max-w-5xl"
+              style="
+                background: linear-gradient(
+                  to right,
+                  transparent,
+                  rgba(141, 34, 40, 0.25),
+                  transparent
+                );
+              "
+            ></div>
+          </div>
+        }
+      }
     </div>
   </div>
 </section>
 
-<!-- Wellness Section -->
-<section class="py-28 bg-accent text-white" id="wellness">
-  <div
-    class="max-w-[1200px] mx-auto px-6 lg:px-40 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center"
-  >
-    <div class="relative" data-aos="fade-up">
+<!-- Restaurant Section coming soon -->
+<!-- Restaurant Section (Coming Soon) -->
+<section
+  id="restaurant"
+  aria-label="Restaurante (próximamente)"
+  class="py-14 sm:py-16 lg:py-20 bg-bg"
+>
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-10 sm:mb-12" data-aos="fade-down">
       <div
-        class="rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-        role="img"
-        aria-label="Spa y piscina climatizada del Hotel Hermitage con vistas a la naturaleza"
-        style="
-          background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQrWZycpc70SKuK_HafCvOzERUXiB-01UvOAykb3RrYAgzZIwkwwsYDDWUC2Rph2J_JeYNc0EBYsotVbE57n8HFqQF1rSQjAHJ9M3cNvCYHT4nWtr1YcWE_6GpuEbuoi_y0mYSAlsKRiY3SUEKx0P0D1eLNsaWJvvIzhxSvTU6Pbcy30KYZ7Z-NASjZLwZw1hkQL03sGULKtbE11zGrBxxIeSTcDEEcEuFOJIrYhyGrVrCbYhaDQI5YFnpb99jnvBSQvuBatMvCOMc');
-          aspect-ratio: 4/5;
-          background-size: cover;
-          background-position: center;
-        "
-      ></div>
-      <div
-        class="absolute -bottom-10 -right-10 w-56 h-56 rounded-2xl overflow-hidden border-[12px] border-accent hidden lg:block shadow-2xl"
-        role="img"
-        aria-label="Sesión de yoga al aire libre en Hermitage"
-        style="
-          background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBx2zMXf-DwF952_Ns_XMDFzKU2AGygfoxXMiI9OBStfl_cEjvM5pXmRRT6Ya82-30N04oY8Xuj97enzB33KlVdRRi89Pli_UzQ31Ey7GuhpRbM_tJ7OPCihMJEIDR7XBsMwitWq9s35RV-Q03uwwPbjr1WHsQKiQhQAh-cte6SuyhcEcgiHKqxiSJ08m_6MoHmuwX7uRjOy0VMd-PqVhS7yej23gQTOmEM3c5ege7Hzj1XbrqEazuqWJ0ubq8Lxo5ZfcHtQTYSjK5g');
-          background-size: cover;
-        "
-      ></div>
-    </div>
-    <div data-aos="fade-down">
-      <span
-        class="text-primary font-bold tracking-[0.2em] uppercase text-[10px] bg-white px-4 py-2 rounded-full"
-        >Renacimiento Personal</span
+        class="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/70 backdrop-blur border border-black/5 shadow-sm"
       >
-      <h2 class="text-5xl md:text-6xl font-light mt-8 mb-8 serif-title leading-tight">
-        El Arte de Reconectar
-      </h2>
-      <p class="text-lg text-white/90 font-light leading-relaxed mb-10">
-        Sumérgete en un estado de quietud absoluta con experiencias diseñadas para conmover tus
-        sentidos y sanar tu espíritu.
+        <svg
+          class="h-4 w-4 sm:h-5 sm:w-5 text-primary"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M11 2h2v10a3 3 0 0 1-6 0V2h2v10a1 1 0 0 0 2 0V2zm7 0h2v6a4 4 0 0 1-4 4v10h-2V12a4 4 0 0 1-4-4V2h2v6a2 2 0 1 0 4 0V2z"
+          />
+        </svg>
+        <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-primary font-extrabold">
+          Restaurante
+        </p>
+      </div>
+
+      <h2 class="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-text">Próximamente</h2>
+
+      <p class="mt-2 text-sm sm:text-base text-text/70 max-w-2xl mx-auto">
+        Estamos preparando una propuesta gastronómica para que tu estadía sea completa, con sabores
+        locales y un ambiente íntimo.
       </p>
-      <ul class="space-y-6 mb-12">
-        <li class="flex items-start gap-4" data-aos="zoom-in" data-aos-delay="100">
-          <span class="material-symbols-outlined text-primary bg-white rounded-full p-1 text-base"
-            >spa</span
+    </div>
+
+    <!-- Card -->
+    <div
+      class="relative overflow-hidden rounded-[2rem] border border-black/5 bg-white/70 backdrop-blur shadow-sm"
+      data-aos="zoom-in"
+    >
+      <!-- Decorative gradients -->
+      <div
+        class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl opacity-20"
+        style="background: radial-gradient(circle, rgba(141, 34, 40, 0.8) 0%, transparent 70%)"
+      ></div>
+      <div
+        class="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-15"
+        style="background: radial-gradient(circle, rgba(141, 34, 40, 0.6) 0%, transparent 70%)"
+      ></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch p-6 sm:p-8 lg:p-10">
+        <!-- Media -->
+        <div class="lg:col-span-7">
+          <div
+            class="relative overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm"
           >
-          <div>
-            <p class="font-bold text-lg leading-none mb-1">Inmersión Térmica</p>
-            <p class="text-white/70 text-sm">
-              Piscina climatizada in/out con el horizonte de Tandil como único testigo.
+            <img
+              src="assets/gallery/restaurant.avif"
+              alt="Restaurante del hotel (próximamente)"
+              class="w-full aspect-[16/10] object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Top-left badge -->
+            <div
+              class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/80 backdrop-blur border border-black/5 shadow-sm"
+            >
+              <span class="h-2 w-2 rounded-full bg-primary"></span>
+              <span class="text-xs uppercase tracking-[0.25em] text-primary font-extrabold">
+                Coming soon
+              </span>
+            </div>
+
+            <!-- Bottom overlay -->
+            <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+              <div
+                class="rounded-2xl border border-white/20 bg-black/45 backdrop-blur-md px-5 py-4 text-white shadow-lg"
+              >
+                <p class="text-sm sm:text-base font-semibold">
+                  Un nuevo espacio para disfrutar sin salir del hotel
+                </p>
+                <p class="mt-1 text-xs sm:text-sm text-white/80">
+                  Carta cuidada • productos locales • ambiente cálido
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="lg:col-span-5 flex flex-col justify-center">
+          <div class="relative">
+            <!-- Watermark -->
+            <svg
+              class="absolute -top-8 -right-6 h-28 w-28 opacity-[0.05]"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M11 2h2v10a3 3 0 0 1-6 0V2h2v10a1 1 0 0 0 2 0V2zm7 0h2v6a4 4 0 0 1-4 4v10h-2V12a4 4 0 0 1-4-4V2h2v6a2 2 0 1 0 4 0V2z"
+              />
+            </svg>
+
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-text">Experiencia gastronómica</h3>
+
+            <p class="mt-3 text-text/70 leading-relaxed">
+              Muy pronto vas a poder reservar tu mesa y sumar un momento especial a tu estadía:
+              desayunos extendidos, opciones livianas y cenas tranquilas.
+            </p>
+
+            <!-- Highlights -->
+            <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <li class="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-3">
+                <span
+                  class="h-10 w-10 rounded-xl bg-white/70 border border-black/5 shadow-sm flex items-center justify-center"
+                >
+                  <svg
+                    class="h-5 w-5 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2l3 7h7l-5.5 4 2.1 7L12 16l-6.6 4 2.1-7L2 9h7z" />
+                  </svg>
+                </span>
+                <span class="text-sm font-semibold text-text/80">Productos locales</span>
+              </li>
+
+              <li class="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-3">
+                <span
+                  class="h-10 w-10 rounded-xl bg-white/70 border border-black/5 shadow-sm flex items-center justify-center"
+                >
+                  <svg
+                    class="h-5 w-5 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 21s-7-4.4-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.6-7 11-7 11z" />
+                  </svg>
+                </span>
+                <span class="text-sm font-semibold text-text/80">Ambiente íntimo</span>
+              </li>
+
+              <li class="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-3">
+                <span
+                  class="h-10 w-10 rounded-xl bg-white/70 border border-black/5 shadow-sm flex items-center justify-center"
+                >
+                  <svg
+                    class="h-5 w-5 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 3h2v10H4V3zm14 0h2v10h-2V3zM7 13h10v2H7v-2zm-3 6h16v2H4v-2z" />
+                  </svg>
+                </span>
+                <span class="text-sm font-semibold text-text/80">Carta cuidada</span>
+              </li>
+
+              <li class="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-3">
+                <span
+                  class="h-10 w-10 rounded-xl bg-white/70 border border-black/5 shadow-sm flex items-center justify-center"
+                >
+                  <svg
+                    class="h-5 w-5 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 16a7 7 0 0 1 14 0H5z" />
+                  </svg>
+                </span>
+                <span class="text-sm font-semibold text-text/80">Atención cercana</span>
+              </li>
+            </ul>
+
+            <!-- CTA -->
+            <div class="mt-7 flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://wa.me/542494286288?text=Hola%2C%20me%20interesa%20recibir%20novedades%20sobre%20el%20restaurante%20del%20Hotel.%20%C2%BFCu%C3%A1ndo%20estar%C3%A1%20disponible%3F"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-3 text-white font-extrabold shadow-sm hover:bg-hover transition"
+              >
+                Quiero novedades por WhatsApp
+              </a>
+
+              <a
+                href="#contact"
+                class="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-5 py-3 text-text font-extrabold hover:bg-black/[0.02] transition"
+              >
+                Consultar al hotel
+              </a>
+            </div>
+
+            <p class="mt-5 text-xs text-text/50 leading-relaxed">
+              *El restaurante se encuentra en preparación. Te avisamos apenas esté disponible.
             </p>
           </div>
-        </li>
-        <li class="flex items-start gap-4" data-aos="zoom-in" data-aos-delay="200">
-          <span class="material-symbols-outlined text-primary bg-white rounded-full p-1 text-base"
-            >self_improvement</span
-          >
-          <div>
-            <p class="font-bold text-lg leading-none mb-1">Rituales de Altura</p>
-            <p class="text-white/70 text-sm">
-              Sesiones de yoga al alba sobre la piedra milenaria, respirando aire puro de sierra.
-            </p>
-          </div>
-        </li>
-        <li class="flex items-start gap-4" data-aos="zoom-in" data-aos-delay="300">
-          <span class="material-symbols-outlined text-primary bg-white rounded-full p-1 text-base"
-            >volcano</span
-          >
-          <div>
-            <p class="font-bold text-lg leading-none mb-1">Alquimia de Piedras</p>
-            <p class="text-white/70 text-sm">
-              Masajes descontracturantes con rocas volcánicas y aceites de lavanda local.
-            </p>
-          </div>
-        </li>
-      </ul>
-      <a
-        class="inline-block bg-white text-accent px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-sand transition-all shadow-xl"
-        href="#contact"
-      >
-        Descubrir Experiencias
-      </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -348,8 +734,9 @@
     <div data-aos="fade-up">
       <h2 class="text-4xl font-bold mb-8">Ubicación</h2>
       <p class="text-text-secondary mb-10 text-lg font-light leading-relaxed">
-        Situados en el corazón de las Sierras de Tandilia, Hermitage es un mundo aparte. A 15
-        minutos de la ciudad, pero a una eternidad del ruido cotidiano.
+        Situados a los pies del parque independencia. Un refugio que se integra con la naturaleza,
+        ofreciendo vistas panorámicas y acceso directo a senderos que invitan a la exploración y el
+        contacto con el entorno serrano.
       </p>
       <div class="rounded-2xl overflow-hidden h-[350px] mb-10 shadow-lg">
         <iframe
@@ -364,18 +751,49 @@
           aria-label="Mapa interactivo mostrando la ubicación de Hotel Hermitage en las sierras de Tandil"
         ></iframe>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 lg:gap-12 items-start sm:items-center justify-between">
+        <!-- Email -->
         <div class="flex flex-col">
           <span class="text-[10px] font-bold uppercase tracking-widest text-primary mb-2"
             >Escríbenos</span
           >
-          <span class="text-lg font-medium">hotelhermitage@hotmail.com</span>
+          <span class="text-sm sm:text-base font-medium flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-primary flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            <span>hotelhermitagetandil@yahoo.com.ar</span>
+          </span>
         </div>
+        
+        <!-- Phone -->
         <div class="flex flex-col">
           <span class="text-[10px] font-bold uppercase tracking-widest text-primary mb-2"
-            >Llámanos</span
+            >Comunicate a nuestro WhatsApp</span
           >
-          <span class="text-lg font-medium">+542494286288</span>
+          <span class="text-sm sm:text-base font-medium flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-primary flex-shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              />
+            </svg>
+            +542494286288
+          </span>
         </div>
       </div>
     </div>
@@ -385,7 +803,17 @@
       data-aos-delay="100"
     >
       <div class="absolute top-0 right-0 p-8 opacity-5">
-        <span class="material-symbols-outlined text-8xl">local_post_office</span>
+        <svg
+          class="w-32 h-32"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+          />
+        </svg>
       </div>
       <h3 class="text-3xl font-bold mb-2">Hablemos de tu estadía</h3>
       <p class="text-text-secondary mb-10 text-sm">
@@ -432,13 +860,32 @@
             class="text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary/60"
             >Fecha estimada</label
           >
-          <input
-            id="contact-date"
-            name="date"
-            class="bg-transparent border-b border-border focus:border-primary focus:ring-0 py-2 outline-none transition-colors"
-            type="date"
-            aria-label="Fecha estimada de llegada"
-          />
+          <div class="relative">
+            <input
+              id="contact-date"
+              name="date"
+              class="bg-transparent border-b border-border focus:border-primary focus:ring-0 py-2 outline-none transition-colors w-full pr-8 cursor-pointer"
+              type="text"
+              placeholder="Seleccione una fecha"
+              aria-label="Fecha estimada de llegada"
+              readonly
+            />
+            <svg
+              class="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 text-primary pointer-events-none"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
         </div>
         <div class="flex flex-col gap-2">
           <label
@@ -462,8 +909,17 @@
           >
             Enviar consulta
           </button>
-          <p class="text-center mt-6 text-xs text-text-secondary/60 italic">
-            <span class="material-symbols-outlined text-xs align-middle mr-1">bolt</span>
+          <p
+            class="text-center mt-6 text-xs text-text-secondary/60 italic flex items-center justify-center gap-1"
+          >
+            <svg
+              class="w-4 h-4 text-primary"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+            </svg>
             Respondemos en menos de 2 horas de forma personalizada
           </p>
         </div>
@@ -472,12 +928,22 @@
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-28 bg-text-secondary text-white text-center">
-  <div class="max-w-2xl mx-auto px-6">
-    <h2 class="text-4xl md:text-5xl serif-title mb-8" data-aos="zoom-in">
-      El silencio que estabas buscando te espera.
+<!-- CTA Parallax Section -->
+<section
+  id="cta"
+  class="relative overflow-hidden text-white text-center py-28 sm:py-32 lg:py-40 cta-parallax"
+  aria-label="Llamado a la acción"
+>
+  <!-- Optional: un degradé para que quede más premium -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/70"></div>
+
+  <!-- Content -->
+  <div class="relative max-w-3xl mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl serif-title mb-8 leading-tight" data-aos="zoom-in">
+      El silencio que estabas buscando<br class="hidden sm:block" />
+      te espera.
     </h2>
+
     <a
       class="inline-block bg-primary hover:bg-hover text-white px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest transition-all shadow-xl"
       href="#contact"
@@ -491,23 +957,209 @@
 
 <!-- Footer -->
 <footer class="py-16 px-6 lg:px-40 bg-bg border-t border-border">
-  <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-    <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-primary text-3xl">landscape</span>
-      <span class="font-bold text-xl tracking-tighter">Hermitage</span>
+  <div class="max-w-[1200px] mx-auto">
+    <!-- Grid principal -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center mb-8">
+      <!-- Logo -->
+      <div class="flex justify-center md:justify-start">
+        <div class="flex flex-col items-center">
+          <img
+            src="assets/logos/hotel_logo_negro.svg"
+            alt="Hermitage Hotel"
+            class="h-16"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="assets/stars.png"
+            alt="3 estrellas"
+            class="h-10 mt-1"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="flex justify-center gap-6">
+        <a
+          href="https://www.instagram.com/hotelhermitagetandil/?hl=es"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-text/10 hover:border-primary transition-all hover:scale-110"
+          aria-label="Visitar Instagram de Hotel Hermitage"
+        >
+          <svg
+            class="w-6 h-6 text-text/60 group-hover:text-primary transition-colors"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://www.facebook.com/hotelhermitagetandiloficial"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-text/10 hover:border-primary transition-all hover:scale-110"
+          aria-label="Visitar Facebook de Hotel Hermitage"
+        >
+          <svg
+            class="w-6 h-6 text-text/60 group-hover:text-primary transition-colors"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="flex justify-center md:justify-end">
+        <p class="text-xs font-medium tracking-wide text-text/50 text-center md:text-right">
+          © 2026 Hermitage Hotel<br class="md:hidden" />
+          <span class="hidden md:inline"> • </span>Tandil, Argentina
+        </p>
+      </div>
     </div>
-    <div
-      class="flex flex-wrap justify-center gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary/70"
-    >
-      <a class="hover:text-primary transition-colors" href="#">Privacidad</a>
-      <a class="hover:text-primary transition-colors" href="#">Términos</a>
-      <a class="hover:text-primary transition-colors" href="#">Instagram</a>
-      <a class="hover:text-primary transition-colors" href="https://wa.me/5492494556677"
-        >WhatsApp</a
-      >
+
+    <!-- Links adicionales (opcional) -->
+    <div class="pt-6 border-t border-border/50">
+      <div class="flex flex-wrap justify-center gap-6 text-xs text-text/50">
+        <a href="tel:+542494286288" class="hover:text-primary transition-colors">+54 2494 286288</a>
+        <span class="text-text/20">•</span>
+        <a href="mailto:hotelhermitagetandil@yahoo.com.ar" class="hover:text-primary transition-colors"
+          >hotelhermitagetandil@yahoo.com.ar</a
+        >
+        <span class="text-text/20">•</span>
+        <a href="#inicio" class="hover:text-primary transition-colors">Volver arriba</a>
+      </div>
     </div>
-    <p class="text-[10px] font-bold uppercase tracking-widest text-text-secondary/40">
-      © 2024 Hermitage Boutique Hotel. Tandil, Argentina.
-    </p>
   </div>
 </footer>
+
+<!-- UNIVERSAL LIGHTBOX (Rooms + Gallery) -->
+@if (lightboxOpen()) {
+  <div
+    id="universalLightbox"
+    class="fixed inset-0 z-[9999]"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+  >
+    <!-- Backdrop -->
+    <button
+      type="button"
+      class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"
+      (click)="closeLightbox()"
+      aria-label="Cerrar galería"
+    ></button>
+
+    <!-- Container -->
+    <div class="relative h-full w-full flex items-center justify-center p-4 sm:p-6">
+      <div class="relative w-full max-w-6xl">
+        <!-- Top bar -->
+        <div class="mb-3 flex items-center justify-between gap-3 text-white">
+          <div class="text-xs sm:text-sm text-white/80 font-semibold">
+            {{ lightboxIndex() + 1 }} / {{ lightboxImages().length }}
+          </div>
+
+          <button
+            type="button"
+            class="inline-flex items-center justify-center h-10 w-10 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 transition"
+            (click)="closeLightbox()"
+            aria-label="Cerrar"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path
+                d="M18.3 5.7a1 1 0 0 0-1.4 0L12 10.6 7.1 5.7a1 1 0 1 0-1.4 1.4l4.9 4.9-4.9 4.9a1 1 0 1 0 1.4 1.4l4.9-4.9 4.9 4.9a1 1 0 0 0 1.4-1.4L13.4 12l4.9-4.9a1 1 0 0 0 0-1.4z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Image stage -->
+        <div
+          class="relative overflow-hidden rounded-3xl border border-white/10 bg-black/30 shadow-2xl"
+        >
+          <img
+            [src]="selectedImage()"
+            alt="Imagen ampliada"
+            class="w-full max-h-[72vh] object-contain bg-black/20"
+            loading="eager"
+            decoding="async"
+            (click)="$event.stopPropagation()"
+          />
+
+          <!-- Prev / Next -->
+          <button
+            type="button"
+            class="absolute left-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 text-white transition"
+            (click)="previousImage($event)"
+            aria-label="Anterior"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5 mx-auto" fill="currentColor" aria-hidden="true">
+              <path
+                d="M15.5 19a1 1 0 0 1-.7-.3l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 1 1 1.4 1.4L11 12l4.9 4.9A1 1 0 0 1 15.5 19z"
+              ></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="absolute right-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 text-white transition"
+            (click)="nextImage($event)"
+            aria-label="Siguiente"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5 mx-auto" fill="currentColor" aria-hidden="true">
+              <path
+                d="M8.5 19a1 1 0 0 1-.7-1.7L12.6 12 7.8 7.1a1 1 0 1 1 1.4-1.4l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 0 1-.7.3z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Thumbnails (pro, sin scrollbar visible) -->
+        <div class="relative mt-3">
+          <!-- Fade izquierdo -->
+          <div
+            class="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black/40 to-transparent"
+          ></div>
+          <!-- Fade derecho -->
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-black/40 to-transparent"
+          ></div>
+
+          <div class="flex gap-2 overflow-x-auto pb-2 px-2 no-scrollbar">
+            @for (img of lightboxImages(); track img; let i = $index) {
+              <button
+                type="button"
+                class="shrink-0 overflow-hidden rounded-2xl border transition"
+                [class.border-white]="i === lightboxIndex()"
+                [class.border-white/20]="i !== lightboxIndex()"
+                (click)="goToImage(i, $event)"
+                aria-label="Ir a imagen"
+              >
+                <img
+                  [src]="img"
+                  alt="Thumb"
+                  class="h-16 w-24 object-cover opacity-90 hover:opacity-100 transition"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+            }
+          </div>
+        </div>
+
+        <p class="mt-2 text-xs text-white/60">Tip: flechas ◀ ▶ o ESC para cerrar.</p>
+      </div>
+    </div>
+  </div>
+}

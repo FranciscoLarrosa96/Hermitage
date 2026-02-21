@@ -1,4 +1,4 @@
-# 🚀 Optimización SEO - Hermitage Boutique Hotel
+# 🚀 Optimización SEO - Hermitage Hotel
 
 ## 📊 Resumen de Optimizaciones Implementadas
 
@@ -10,7 +10,7 @@ Este documento detalla todas las optimizaciones de SEO aplicadas a la landing pa
 
 ### Meta Tags Básicos
 
-- ✓ **Title optimizado**: "Hermitage Boutique Hotel Tandil | Hotel de Lujo en las Sierras"
+- ✓ **Title optimizado**: "Hermitage Hotel Tandil | Hotel de Lujo en las Sierras"
 - ✓ **Meta Description**: 160 caracteres con palabras clave estratégicas
 - ✓ **Meta Keywords**: Términos relevantes del mercado hotelero local
 - ✓ **Language y Region**: Configurado para Argentina (es-AR)
@@ -43,7 +43,7 @@ Este documento detalla todas las optimizaciones de SEO aplicadas a la landing pa
 ```json
 {
   "@type": "Hotel",
-  "name": "Hermitage Boutique Hotel",
+  "name": "Hermitage Hotel",
   "description": "...",
   "address": {...},
   "geo": {...},
@@ -145,7 +145,7 @@ Google prioriza sitios accesibles en su algoritmo de ranking.
 ### Keywords Primarias
 
 1. hotel tandil
-2. hotel boutique tandil
+2. hotel tandil
 3. hotel lujo tandil
 4. spa tandil
 5. turismo tandil
@@ -310,7 +310,7 @@ CTAs → Múltiples llamados a acción al formulario
 ### 3 Meses
 
 - Top 10 para "hotel tandil"
-- Top 5 para "hotel boutique tandil"
+- Top 5 para "hotel tandil"
 - Tráfico orgánico: +150%
 
 ### 6 Meses
@@ -321,14 +321,14 @@ CTAs → Múltiples llamados a acción al formulario
 
 ### 12 Meses
 
-- #1 para "hotel boutique tandil"
+- #1 para "hotel tandil"
 - 50% del tráfico desde SEO orgánico
 - ROI positivo en marketing digital
 
 ---
 
 <div align="center">
-  <p><strong>Hermitage Boutique Hotel</strong></p>
+  <p><strong>Hermitage Hotel</strong></p>
   <p>SEO Optimizado para Máxima Visibilidad 🚀</p>
   <p><em>Última actualización: Enero 2026</em></p>
 </div>

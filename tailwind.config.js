@@ -22,7 +22,7 @@ module.exports = {
         hover: 'var(--color-hover)',
       },
       fontFamily: {
-        sans: ['Rajdhani', 'sans-serif'],
+        sans: ['Signika', 'sans-serif'],
       },
       borderRadius: {
         xl: '1rem',

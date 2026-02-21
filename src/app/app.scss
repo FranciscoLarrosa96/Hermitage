@@ -13,27 +13,500 @@
 /* IMPORTANTE:
    Como renderizamos A + A (duplicado), movemos -50% para loop perfecto */
 @keyframes marquee-left {
-  from { transform: translate3d(0,0,0); }
-  to   { transform: translate3d(-50%,0,0); }
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* Para el sentido contrario, arrancamos ya corridos */
 @keyframes marquee-right {
-  from { transform: translate3d(-50%,0,0); }
-  to   { transform: translate3d(0,0,0); }
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* Velocidades diferentes (se ve más premium) */
-.marquee-left  { animation-name: marquee-left;  animation-duration: 40s; }
-.marquee-right { animation-name: marquee-right; animation-duration: 40s; }
+.marquee-left {
+  animation-name: marquee-left;
+  animation-duration: 40s;
+}
+.marquee-right {
+  animation-name: marquee-right;
+  animation-duration: 40s;
+}
 
 /* En mobile: más lento (más legible) */
 @media (max-width: 640px) {
-  .marquee-left  { animation-duration: 48s; }
-  .marquee-right { animation-duration: 56s; }
+  .marquee-left {
+    animation-duration: 48s;
+  }
+  .marquee-right {
+    animation-duration: 56s;
+  }
 }
 
 /* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-  .marquee { animation: none; }
+  .marquee {
+    animation: none;
+  }
+}
+
+/* --- HERO IMAGE DOUBLE WIPE REVEAL EFFECT --- */
+.hero-reveal-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Primer overlay - cortina principal más opaca */
+.hero-reveal-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.95) 75%,
+    rgba(255, 255, 255, 0.6) 90%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 21;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(0);
+}
+
+/* Segundo overlay - cortina más sutil que sigue */
+.hero-reveal-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.7) 70%,
+    rgba(255, 255, 255, 0.4) 85%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(0);
+}
+
+.hero-reveal-container.hero-revealed::before {
+  animation: curtainReveal1 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.hero-reveal-container.hero-revealed::after {
+  animation: curtainReveal2 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Primera cortina - movimiento completo */
+@keyframes curtainReveal1 {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  45% {
+    transform: translateX(105%);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(105%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(105%);
+    opacity: 0;
+  }
+}
+
+/* Segunda cortina - se demora un poco y crea efecto de seguimiento */
+@keyframes curtainReveal2 {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  15% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(105%);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(105%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(105%);
+    opacity: 0;
+  }
+}
+
+/* Respeta preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal-container::before {
+    animation: none !important;
+  }
+}
+
+/* --- GALLERY CARD PREMIUM --- */
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  aspect-ratio: 4 / 3;
+  background: #f0f0f0;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card:hover .gallery-image {
+  transform: scale(1.1);
+}
+
+/* Overlay on hover */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(141, 34, 40, 0.85) 0%, rgba(107, 26, 30, 0.9) 100%);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-icon {
+  color: white;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.gallery-card:hover .gallery-icon {
+  transform: scale(1);
+}
+
+/* --- LIGHTBOX PREMIUM --- */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10001;
+}
+
+.lightbox-close:hover {
+  background: rgba(141, 34, 40, 0.9);
+  transform: rotate(90deg);
+}
+
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10001;
+}
+
+.lightbox-nav:hover {
+  background: rgba(141, 34, 40, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+  left: 1.5rem;
+}
+
+.lightbox-next {
+  right: 1.5rem;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .lightbox-nav {
+    padding: 0.75rem;
+  }
+
+  .lightbox-nav svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+  }
+
+  .lightbox-close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .lightbox-prev {
+    left: 0.5rem;
+  }
+
+  .lightbox-next {
+    right: 0.5rem;
+  }
+}
+
+/* --- Reduce motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-card,
+  .gallery-image,
+  .gallery-overlay,
+  .lightbox-backdrop,
+  .lightbox-content {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* CTA Parallax */
+.cta-parallax {
+  background-image: url('../assets/bg/bg-1.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* <-- el efecto */
+}
+
+/* Mobile fallback: fixed suele fallar en iOS/Android */
+@media (max-width: 768px) {
+  .cta-parallax {
+    background-attachment: scroll;
+    background-position: center;
+  }
+}
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* --- DOUBLE WIPE / SWEEP REVEAL (Apple-ish) --- */
+.hero-wipe {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* asegura z-index correctos */
+}
+
+/* Opcional: que la imagen arranque apenas "apagada" y se asiente */
+.hero-wipe img {
+  transform: scale(1.95);
+}
+
+/* Overlays: gigantes + skew (igual al ejemplo que inspeccionaste) */
+.hero-wipe::before,
+.hero-wipe::after {
+  content: '';
+  position: absolute;
+  inset: -50%;            /* => 200% x 200% */
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 5;
+
+  transform: translate3d(-120%, 0, 0) skewX(-12deg);
+  opacity: 0;
+
+  /* “porcelana” / blanco suave */
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.92) 65%,
+    rgba(255, 255, 255, 0.35) 84%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* Segundo pase: más sutil, más finito, un toque distinto */
+.hero-wipe::after {
+  z-index: 6;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.65) 60%,
+    rgba(255, 255, 255, 0.25) 82%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translate3d(-120%, 0, 0) skewX(-12deg) scaleX(0.92);
+}
+
+/* Disparo */
+.hero-wipe.is-revealed::before {
+  opacity: 1;
+  animation: heroWipeA 4400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-wipe.is-revealed::after {
+  opacity: 1;
+  animation: heroWipeB 1600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 300ms;
+}
+
+
+@keyframes heroWipeA {
+  0%   { transform: translate3d(-120%,0,0) skewX(-12deg); opacity: 1; }
+  70%  { transform: translate3d(120%,0,0)  skewX(-12deg); opacity: 1; }
+  85%  { opacity: 0.4; }
+  100% { transform: translate3d(120%,0,0)  skewX(-12deg); opacity: 0; }
+}
+
+@keyframes heroWipeB {
+  0%   { transform: translate3d(-120%,0,0) skewX(-12deg) scaleX(0.92); opacity: 1; }
+  65%  { transform: translate3d(120%,0,0)  skewX(-12deg) scaleX(0.92); opacity: 1; }
+  85%  { opacity: 0.3; }
+  100% { transform: translate3d(120%,0,0)  skewX(-12deg) scaleX(0.92); opacity: 0; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wipe::before,
+  .hero-wipe::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+.hero-wipe.is-revealed img {
+  animation: heroImageSettle 2800ms ease forwards;
+}
+
+@keyframes heroImageSettle {
+  from { transform: scale(1.95); }
+  to   { transform: scale(1); }
 }
