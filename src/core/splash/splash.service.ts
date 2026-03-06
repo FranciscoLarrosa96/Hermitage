@@ -14,7 +14,7 @@ export class SplashService {
 
   constructor() {
     // asegura que al menos se vea un poquito (premium, no flash)
-    const MIN_MS = 1700;
+    const MIN_MS = 3000;
     const start = performance.now();
 
     // cuando ya hubo 1 render, habilitamos salida
