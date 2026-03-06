@@ -3,7 +3,6 @@ import {
   OnInit,
   signal,
   inject,
-  computed,
   ElementRef,
   DestroyRef,
   afterNextRender,
@@ -12,6 +11,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 import AirDatepicker from 'air-datepicker';
 import localeEs from 'air-datepicker/locale/es';
+import GLightbox from 'glightbox';
 import { SplashOverlayComponent } from '../core/splash/splash-overlay.component';
 
 type ResponsiveImages = { desktop: string[]; mobile: string[] };
@@ -32,7 +32,6 @@ type GallerySection = {
   styleUrls: ['./app.scss'],
   host: {
     '(window:scroll)': 'onWindowScroll()',
-    '(window:keydown)': 'onKeyDown($event)',
   },
 })
 export class App implements OnInit {
@@ -42,20 +41,11 @@ export class App implements OnInit {
   protected readonly title = signal('hermitage');
   protected readonly isScrolled = signal(false);
   protected readonly revealedHeroImages = signal<Set<string>>(new Set());
-  // ✅ Lightbox universal (sirve para gallery y rooms)
-  protected readonly lightboxOpen = signal(false);
-  protected readonly lightboxImages = signal<string[]>([]);
-  protected readonly lightboxIndex = signal(0);
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
   readonly heroRevealed = signal(false);
   // Detector de viewport Mobile/Desktop
   protected readonly isMobile = signal(false);
-  protected readonly selectedImage = computed(() => {
-    const imgs = this.lightboxImages();
-    const idx = this.lightboxIndex();
-    return imgs[idx] ?? '';
-  });
   public readonly reviews = [
     'review1.png',
     'review2.png',
@@ -244,7 +234,17 @@ export class App implements OnInit {
       const resizeHandler = () => this.checkViewport();
       window.addEventListener('resize', resizeHandler);
       this.destroyRef.onDestroy(() => window.removeEventListener('resize', resizeHandler));
+
+      // Inicializar GLightbox para todas las galerías
+      GLightbox({ touchNavigation: true, loop: true, closeButton: true });
     });
+  }
+
+  protected openGallery(galleryId: string): void {
+    const link = this.el.nativeElement.querySelector(
+      `a.glightbox[data-gallery="${galleryId}"]`,
+    ) as HTMLAnchorElement | null;
+    link?.click();
   }
 
   /**
@@ -281,13 +281,6 @@ export class App implements OnInit {
   }
 
   /**
-   * Retorna todas las imágenes de una room (hero + resto) para el lightbox
-   */
-  protected getAllRoomImages(section: any): string[] {
-    return [section.hero, ...section.images];
-  }
-
-  /**
    * Detecta cuando el usuario hace scroll y actualiza el estado del header
    */
   protected onWindowScroll(): void {
@@ -302,105 +295,6 @@ export class App implements OnInit {
     this.isMobile.set(window.innerWidth < 768);
   }
 
-  // Helper: devuelve la primera imagen (desktop)
-  protected getFirstImage(images: (string | { desktop: string; mobile: string })[]): string {
-    const first = images[0];
-    return typeof first === 'string' ? first : first.desktop;
-  }
-
-  // ---------------- LIGHTBOX (universal) ----------------
-  protected openLightbox(
-    imageSrc: string,
-    images: (string | { desktop: string; mobile: string })[],
-    focusId?: string,
-  ): void {
-    if (!images?.length) return;
-
-    const idx = images.indexOf(imageSrc);
-    this.lightboxImages.set(images.map((img) => (typeof img === 'string' ? img : img.desktop)));
-    this.lightboxIndex.set(idx >= 0 ? idx : 0);
-
-    this.lightboxOpen.set(true);
-    document.documentElement.classList.add('overflow-hidden'); // lock scroll (mejor que body)
-
-    // opcional: foco para accesibilidad
-    queueMicrotask(() => {
-      if (!focusId) return;
-      const el = document.getElementById(focusId);
-      el?.focus();
-    });
-  }
-
-  /**
-   *  Abre el lightbox para una galería específica, adaptando las imágenes según el viewport (mobile/desktop) y posicionando el índice en la imagen seleccionada. También bloquea el scroll del fondo y opcionalmente enfoca un elemento dentro del lightbox para mejorar la accesibilidad.
-   * @param images
-   * @param startIndex
-   * @param focusId
-   * @returns
-   */
-  protected openGalleryLightbox(images: GalleryImages, startIndex = 0, focusId?: string): void {
-    const list = this.getImagesByViewport(images);
-    if (!list.length) return;
-
-    const safeIndex = Math.min(Math.max(startIndex, 0), list.length - 1);
-
-    this.lightboxImages.set(list);
-    this.lightboxIndex.set(safeIndex);
-    this.lightboxOpen.set(true);
-    document.documentElement.classList.add('overflow-hidden');
-
-    queueMicrotask(() => {
-      if (!focusId) return;
-      document.getElementById(focusId)?.focus();
-    });
-  }
-
-  protected closeLightbox(): void {
-    this.lightboxOpen.set(false);
-    this.lightboxImages.set([]);
-    this.lightboxIndex.set(0);
-    document.documentElement.classList.remove('overflow-hidden');
-  }
-
-  protected nextImage(ev?: Event): void {
-    ev?.stopPropagation();
-    const imgs = this.lightboxImages();
-    if (!imgs.length) return;
-    this.lightboxIndex.set((this.lightboxIndex() + 1) % imgs.length);
-  }
-
-  protected previousImage(ev?: Event): void {
-    ev?.stopPropagation();
-    const imgs = this.lightboxImages();
-    if (!imgs.length) return;
-    this.lightboxIndex.set((this.lightboxIndex() - 1 + imgs.length) % imgs.length);
-  }
-
-  protected goToImage(i: number, ev?: Event): void {
-    ev?.stopPropagation();
-    const imgs = this.lightboxImages();
-    if (!imgs.length) return;
-    const idx = Math.max(0, Math.min(i, imgs.length - 1));
-    this.lightboxIndex.set(idx);
-  }
-  /**
-   * Maneja la navegación del lightbox con el teclado
-   */
-  protected onKeyDown(event: KeyboardEvent): void {
-    if (!this.lightboxOpen()) return;
-
-    switch (event.key) {
-      case 'Escape':
-        this.closeLightbox();
-        break;
-      case 'ArrowLeft':
-        this.previousImage();
-        break;
-      case 'ArrowRight':
-        this.nextImage();
-        break;
-    }
-  }
   /**
    * Configura el título de la página y las meta etiquetas para mejorar el SEO. Esto incluye la descripción, palabras clave, Open Graph y Twitter Card para optimizar cómo se muestra el sitio en los motores de búsqueda y redes sociales.
    */
